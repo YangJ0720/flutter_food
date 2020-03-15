@@ -1,48 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food/model/find_model.dart';
+import 'package:food/widget/find_tab_view_waterfall.dart';
+import 'package:food/widget/load_view.dart';
 
-class FindTabView extends StatelessWidget {
+/// 发现 -> TabBarView
+class FindTabView extends StatefulWidget {
   final List<FindModel> _list;
   final TabController _tabController;
 
   const FindTabView(this._list, this._tabController);
 
+  @override
+  State<StatefulWidget> createState() {
+    return FindTabViewState();
+  }
+}
+
+class FindTabViewState extends State<FindTabView> {
   List<Widget> _create() {
-    if (_list == null) {
+    if (widget._list == null) {
       return [];
     }
     List<Widget> list = List<Widget>();
-    _list.forEach((i) => {list.add(_createContentView())});
+    widget._list.forEach((i) => {list.add(_createContentView(i))});
     return list;
   }
 
-  Widget _createContentView() {
-    return StaggeredGridView.countBuilder(
-        controller: ScrollController(),
-        itemCount: 100,
-        crossAxisCount: 4,
-        mainAxisSpacing: 5,
-        crossAxisSpacing: 5,
-        itemBuilder: (context, index) => Container(
-              color: Colors.pink,
-              child: Center(
-                child: Text('$index'),
-              ),
-            ),
-        staggeredTileBuilder: (index) =>
-            StaggeredTile.count(2, index % 2 == 0 ? 2 : 1));
+  Widget _createContentView(FindModel model) {
+    return FindTabViewWaterfall(model: model);
   }
 
   @override
   Widget build(BuildContext context) {
-    return _list.isEmpty
-        ? Center(
-            child: Text('正在加载数据'),
-          )
-        : TabBarView(
-            children: _create(),
-            controller: _tabController,
+    return widget._list.isEmpty
+        ? LoadView()
+        : Container(
+            margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+            child: TabBarView(
+              children: _create(),
+              controller: widget._tabController,
+            ),
           );
   }
 }

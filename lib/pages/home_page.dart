@@ -6,6 +6,7 @@ import 'package:food/model/home_model.dart';
 import 'package:food/model/home_navigation_model.dart';
 import 'package:food/widget/home_banner.dart';
 import 'package:food/widget/home_navigation.dart';
+import 'package:food/widget/load_view.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -35,6 +36,22 @@ class HomeState extends State with AutomaticKeepAliveClientMixin {
     });
   }
 
+  Widget _empty() {
+    return _banner.length == 0
+        ? LoadView()
+        : ListView(
+            children: <Widget>[
+              HomeBanner(_banner),
+              HomeNavigation(_navigation),
+              Container(
+                child: Text('data'),
+                height: 800,
+              ),
+              Text('bottom'),
+            ],
+          );
+  }
+
   @override
   void initState() {
     rootBundle.loadString('assets/home.json').then((value) {
@@ -61,17 +78,7 @@ class HomeState extends State with AutomaticKeepAliveClientMixin {
             }
             return false;
           },
-          child: ListView(
-            children: <Widget>[
-              HomeBanner(_banner),
-              HomeNavigation(_navigation),
-              Container(
-                child: Text('data'),
-                height: 800,
-              ),
-              Text('bottom'),
-            ],
-          ),
+          child: _empty(),
         ),
         Opacity(
           opacity: _alpha,
