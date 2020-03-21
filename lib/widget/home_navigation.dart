@@ -7,11 +7,11 @@ import 'package:food/model/home_navigation_model.dart';
 class HomeNavigation extends StatelessWidget {
   final List<HomeNavigationModel> list;
 
-  HomeNavigation(this.list);
+  const HomeNavigation({Key key, this.list}) : super(key: key);
 
   List<Widget> _item(BuildContext context) {
     if (list == null) {
-      return null;
+      return List();
     }
     List<Widget> item = List();
     list.forEach((i) => item.add(_create(context, i)));

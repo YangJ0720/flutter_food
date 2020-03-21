@@ -1,11 +1,16 @@
+import 'package:food/model/home_grid_nav_model.dart';
+import 'package:food/model/home_tab_model.dart';
+
 import 'home_navigation_model.dart';
 
 /// 首页
 class HomeModel {
-  final List<String> banner;
-  final List<HomeNavigationModel> navigation;
+  List<String> banner = List();
+  List<HomeNavigationModel> navigation = List();
+  List<HomeGridNavModel> gridNav = List();
+  List<HomeTabModel> tab = List();
 
-  HomeModel(this.banner, this.navigation);
+  HomeModel([this.banner, this.navigation, this.gridNav, this.tab]);
 
   factory HomeModel.fromJson(Map<String, dynamic> json) {
     /// 轮播图
@@ -16,6 +21,16 @@ class HomeModel {
     List<dynamic> nav = json['navigation'];
     List<HomeNavigationModel> navigation =
         nav.map((i) => HomeNavigationModel.fromJson(i)).toList();
-    return HomeModel(urls, navigation);
+
+    /// 网格导航
+    List<dynamic> gridNavJson = json['gridNavigation'];
+    List<HomeGridNavModel> gridNav =
+        gridNavJson.map((i) => HomeGridNavModel.fromJson(i)).toList();
+
+    /// 选项卡
+    List<dynamic> tabsJson = json['tabs'];
+    List<HomeTabModel> tabs =
+        tabsJson.map((i) => HomeTabModel.fromJson(i)).toList();
+    return HomeModel(urls, navigation, gridNav, tabs);
   }
 }

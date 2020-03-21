@@ -33,7 +33,7 @@ class FindState extends State
       List<FindModel> list = data.map((i) => FindModel.fromJson(i)).toList();
       setState(() {
         _tabs = list;
-        _tabController = TabController(length: _tabs.length, vsync: this);
+        _tabController = TabController(length: list.length, vsync: this);
         _tabController.addListener(_addListener);
       });
     });
@@ -44,9 +44,7 @@ class FindState extends State
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: AppBar(
-        title: FindTab(_tabs, _tabController),
-      ),
+      appBar: AppBar(title: FindTab(_tabs, _tabController)),
       body: FindTabView(_tabs, _tabController),
     );
   }

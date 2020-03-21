@@ -1,38 +1,98 @@
 {
-  "banner": [
-    {
-      "url": "https://img4.mukewang.com/540e57300001d6d906000338-240-135.jpg"
-    },
-    {
-      "url": "https://img3.mukewang.com/5ce4b199083e469306000338-240-135.jpg"
-    },
-    {
-      "url": "https://img.mukewang.com/5dd7561309f8ae4806000338-240-135.png"
-    },
-    {
-      "url": "https://img4.mukewang.com/5de8a5740989152106000338-240-135.png"
-    }
-  ],
-  "navigation": [
-    {
-      "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
-      "label": "美食"
-    },
-    {
-      "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_burger.png?raw=true",
-      "label": "超市便利"
-    },
-    {
-      "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_cola.png?raw=true",
-      "label": "买菜"
-    },
-    {
-      "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_drink.png?raw=true",
-      "label": "跑腿代购"
-    },
-    {
-      "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_watermelon.png?raw=true",
-      "label": "送药上门"
-    }
-  ]
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "banner": [
+      {
+        "url": "https://img4.mukewang.com/540e57300001d6d906000338-240-135.jpg"
+      },
+      {
+        "url": "https://img3.mukewang.com/5ce4b199083e469306000338-240-135.jpg"
+      },
+      {
+        "url": "https://img.mukewang.com/5dd7561309f8ae4806000338-240-135.png"
+      },
+      {
+        "url": "https://img4.mukewang.com/5de8a5740989152106000338-240-135.png"
+      }
+    ],
+    "navigation": [
+      {
+        "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "美食"
+      },
+      {
+        "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_burger.png?raw=true",
+        "label": "超市便利"
+      },
+      {
+        "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_cola.png?raw=true",
+        "label": "买菜"
+      },
+      {
+        "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_drink.png?raw=true",
+        "label": "跑腿代购"
+      },
+      {
+        "url": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_watermelon.png?raw=true",
+        "label": "送药上门"
+      }
+    ],
+    "gridNavigation": [
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "午餐"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "汉堡披萨"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "快餐便当"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "买菜"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "福利中心"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "星选好店"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "大牌惠吃"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "签到赢饭钱"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "送药上门"
+      },
+      {
+        "icon": "https://github.com/YangJ0720/flutter_takeout/blob/master/flutter_takeout/images/ic_item_apple.png?raw=true",
+        "label": "全部分类"
+      }
+    ],
+    "tabs": [
+      {
+        "id": 1,
+        "label": "推荐"
+      },
+      {
+        "id": 2,
+        "label": "果蔬商超"
+      },
+      {
+        "id": 3,
+        "label": "到店自取"
+      }
+    ]
+  }
 }

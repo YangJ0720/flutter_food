@@ -28,7 +28,7 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
 
   Future<Null> _loadData() async {
     await DefaultAssetBundle.of(context)
-        .loadString('assets/find_waterfall_${widget.model.id}.json')
+        .loadString('assets/find/${widget.model.id}/find_waterfall.json')
         .then((value) {
       Map<String, dynamic> map = json.decode(value);
       List<dynamic> data = map['data'] as List;
@@ -57,9 +57,7 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
               ConstrainedBox(
                 constraints: BoxConstraints.expand(),
                 child: CachedNetworkImage(
-                  imageUrl: _list[index].background,
-                  fit: BoxFit.cover,
-                ),
+                    imageUrl: _list[index].background, fit: BoxFit.cover),
               ),
               Container(
                 decoration: BoxDecoration(color: Color(0xE6F5F5F5)),
@@ -72,9 +70,7 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
                       children: <Widget>[
                         Text(
                           _list[index].name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           _list[index].summary,
@@ -89,9 +85,7 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
           ),
         ),
       ),
-      onTap: () {
-        
-      },
+      onTap: () {},
     );
   }
 

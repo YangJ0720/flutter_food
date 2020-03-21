@@ -122,8 +122,8 @@ class BannerViewState extends State<BannerView> {
       var item = Container(
         margin: EdgeInsets.all(5),
         width: 20,
-        height: 5,
-        color: _indicator == i ? Color(0xFF808080) : Color(0xFFF5F5F5),
+        height: 1,
+        color: _indicator == i ? Colors.white : Color(0xFFADADAD),
       );
       _list.add(item);
     }

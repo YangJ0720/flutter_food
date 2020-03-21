@@ -19,9 +19,7 @@ class FindTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _list.isEmpty
-        ? Center(
-            child: Text('正在加载数据'),
-          )
+        ? Center(child: Text('正在加载数据'))
         : TabBar(
             tabs: _create(),
             controller: _tabController,
