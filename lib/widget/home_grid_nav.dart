@@ -19,7 +19,11 @@ class HomeGridNavState extends State<HomeGridNav> {
     List<Widget> list = List();
     if (widget.list != null && widget.list.isNotEmpty) {
       widget.list.forEach((i) {
-        list.add(Column(children: <Widget>[Icon(Icons.home), Text(i.label)]));
+        list.add(Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[Icon(Icons.home), Text(i.label)],
+        ));
       });
     }
     return list;

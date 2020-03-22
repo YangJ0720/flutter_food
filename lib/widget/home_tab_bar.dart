@@ -27,16 +27,9 @@ class HomeTabBarState extends State<HomeTabBar> {
     } else {
       List<Widget> tabs = List();
       List<HomeTabModel> list = widget.list;
-      list.forEach((i) => {tabs.add(_createTabContent(i))});
+      list.forEach((i) => {tabs.add(Tab(text: i.label))});
       return tabs;
     }
-  }
-
-  Widget _createTabContent(HomeTabModel model) {
-    return Container(
-      child: Center(child: Text(model.label)),
-      color: Colors.white,
-    );
   }
 
   @override
@@ -46,7 +39,8 @@ class HomeTabBarState extends State<HomeTabBar> {
         child: TabBar(
             tabs: _createTab(),
             controller: widget.tabController,
-            labelColor: Colors.black),
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey),
       ),
       pinned: true,
     );

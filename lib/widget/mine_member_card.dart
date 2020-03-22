@@ -29,15 +29,17 @@ class MineMemberCardState extends State<MineMemberCard> {
                   gradient: LinearGradient(
                       colors: [Color(0xFFFFEBCD), Color(0xFFFFE4B5)])),
               padding: EdgeInsets.all(10),
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.home),
-                  Expanded(
-                    child: Text('超级会员'),
-                  ),
-                  Text('开通后，每月领超过20元红包', style: TextStyle(fontSize: 12),)
-                ],
-              ),
+              child: Stack(children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.home),
+                    Expanded(
+                      child: Text('超级会员'),
+                    ),
+                    Text('开通后，每月领超过20元红包', style: TextStyle(fontSize: 12),)
+                  ],
+                )
+              ],),
             ),
           ),
           GestureDetector(

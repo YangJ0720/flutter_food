@@ -8,7 +8,7 @@ class HomeViewPagerSliver extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child.tabs.length == 0 ? Container() : child;
+    return Container(color: Colors.white, child: child);
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:food/model/find_model.dart';
 import 'package:food/widget/find_tab.dart';
 import 'package:food/widget/find_tab_view.dart';
@@ -25,18 +25,24 @@ class FindState extends State
     }
   }
 
-  @override
-  void initState() {
-    rootBundle.loadString('assets/find.json').then((value) {
-      Map<String, dynamic> map = json.decode(value);
-      List<dynamic> data = map['data'] as List;
+  void _onRequest() async {
+    var url =
+        'https://gitee.com/YangJ0720/flutter_takeout/raw/af5f2602bd92d9b82a9f304b1252efd2332c4e7f/flutter_takeout/assets/find.json';
+    Response response = await Dio().get(url);
+    if (200 == response.statusCode) {
+      List<dynamic> data = json.decode(response.data)['data'];
       List<FindModel> list = data.map((i) => FindModel.fromJson(i)).toList();
       setState(() {
         _tabs = list;
         _tabController = TabController(length: list.length, vsync: this);
         _tabController.addListener(_addListener);
       });
-    });
+    }
+  }
+
+  @override
+  void initState() {
+    _onRequest();
     super.initState();
   }
 

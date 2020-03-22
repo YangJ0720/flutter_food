@@ -26,9 +26,11 @@ class HomeSearchSliver extends SliverPersistentHeaderDelegate {
               opacity: _alpha,
               child: Row(
                 children: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Icon(Icons.location_on, color: Colors.grey)),
+                  Container(
+                      margin: EdgeInsets.only(left: 10),
+                      child: Image.asset('images/ajk.png'),
+                      width: 30,
+                      height: 30),
                   Expanded(
                     child: Text(_address,
                         maxLines: 1, overflow: TextOverflow.ellipsis),

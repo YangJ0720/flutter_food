@@ -1,11 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import "package:flutter/material.dart";
 
 /// 个人资料
 class UserInfo extends StatefulWidget {
-  final String url;
+  final String path;
 
-  UserInfo(this.url);
+  UserInfo(this.path);
 
   @override
   State<StatefulWidget> createState() {
@@ -21,7 +20,7 @@ class UserInfoState extends State<UserInfo> {
     );
   }
 
-  Widget _createItemByBind(IconData iconData, String label, bool isBind,
+  Widget _createItemByBind(String name, String label, bool isBind,
       [String value]) {
     return Container(
       padding: EdgeInsets.all(10),
@@ -29,6 +28,12 @@ class UserInfoState extends State<UserInfo> {
           border: Border(bottom: BorderSide(color: Colors.grey, width: 0.1))),
       child: Row(
         children: <Widget>[
+          Container(
+            width: 40,
+            height: 40,
+            child: Image.asset(name),
+            margin: EdgeInsets.only(right: 10),
+          ),
           Expanded(child: Text(label)),
           Container(
               height: 40,
@@ -51,6 +56,7 @@ class UserInfoState extends State<UserInfo> {
       body: ListView(
         children: <Widget>[
           Container(
+              margin: EdgeInsets.only(top: 5),
               padding: EdgeInsets.all(10),
               child: Text('基础信息', style: TextStyle(fontSize: 10))),
           GestureDetector(
@@ -63,10 +69,10 @@ class UserInfoState extends State<UserInfo> {
               child: Row(
                 children: <Widget>[
                   Expanded(child: Text('头像')),
-                  ClipRRect(
-                    child: CachedNetworkImage(
-                        imageUrl: widget.url, width: 40, height: 40),
-                    borderRadius: BorderRadius.circular(50),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    child: ClipOval(child: Image.asset(widget.path)),
                   ),
                   Icon(Icons.keyboard_arrow_right)
                 ],
@@ -100,14 +106,15 @@ class UserInfoState extends State<UserInfo> {
             ),
           ),
           Container(
+              margin: EdgeInsets.only(top: 10),
               padding: EdgeInsets.all(10),
               child: Text('账号绑定', style: TextStyle(fontSize: 10))),
-          _createItemByBind(Icons.label, '手机', true, '188****8888'),
-          _createItemByBind(Icons.label, '淘宝', true),
-          _createItemByBind(Icons.label, '支付宝', true),
-          _createItemByBind(Icons.label, '微博', false),
-          _createItemByBind(Icons.label, '微信', true),
-          _createItemByBind(Icons.label, 'QQ', false),
+          _createItemByBind('images/a5i.png', '手机', true, '188****8888'),
+          _createItemByBind('images/a5k.png', '淘宝', true),
+          _createItemByBind('images/a5h.png', '支付宝', true),
+          _createItemByBind('images/a5m.png', '微博', false),
+          _createItemByBind('images/a5l.png', '微信', true),
+          _createItemByBind('images/a5j.png', 'QQ', false),
         ],
       ),
     );

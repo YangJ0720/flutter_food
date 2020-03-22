@@ -43,7 +43,7 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
     return appBar;
   }
 
-  Widget _createItem(String text) {
+  Widget _createItem(String path, String text) {
     return Container(
       decoration: BoxDecoration(
         border:
@@ -53,7 +53,7 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
         padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
         child: Row(
           children: <Widget>[
-            Icon(Icons.add, color: Colors.grey),
+            Container(width: 40, height: 40, child: Image.asset(path)),
             Expanded(child: Text(text)),
             Icon(Icons.chevron_right, color: Colors.grey)
           ],
@@ -102,13 +102,13 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
                 MineCard('钱包', null, '金币、借钱、福利'),
               ],
             ),
-            _createItem('我的收藏'),
-            _createItem('我的客服'),
-            _createItem('推荐有奖'),
-            _createItem('商务合作'),
-            _createItem('办卡有礼'),
-            _createItem('3小时公益'),
-            _createItem('企业订餐'),
+            _createItem('images/bdr.png', '我的收藏'),
+            _createItem('images/bdr.png', '我的客服'),
+            _createItem('images/bdr.png', '推荐有奖'),
+            _createItem('images/bdr.png', '商务合作'),
+            _createItem('images/bdr.png', '办卡有礼'),
+            _createItem('images/bdr.png', '3小时公益'),
+            _createItem('images/bdr.png', '企业订餐'),
             Container(color: Colors.white70, height: 80),
           ],
         ),

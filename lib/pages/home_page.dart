@@ -46,27 +46,23 @@ class HomeState extends State
     });
   }
 
-  void getHttp() async {
-    Response response = await Dio().get(
-        'https://github.com/YangJ0720/flutter_food/blob/master/assets/find.json?raw=true');
-    print('response = $response');
-    int code = response.statusCode;
-    print('code = $code');
-    dynamic data = response.data;
-    print('data = $data');
-  }
-
-  @override
-  void initState() {
-    getHttp();
-    rootBundle.loadString('assets/home.json').then((value) {
-      Map<String, dynamic> map = json.decode(value);
-      HomeModel model = HomeModel.fromJson(map['data']);
+  void _onRequest() async {
+    var url =
+        'https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/assets/home.json';
+    Response response = await Dio().get(url);
+    if (200 == response.statusCode) {
+      Map<String, dynamic> data = json.decode(response.data)['data'];
+      HomeModel model = HomeModel.fromJson(data);
       setState(() {
         _homeModel = model;
         _tabController = TabController(length: model.tab.length, vsync: this);
       });
-    });
+    }
+  }
+
+  @override
+  void initState() {
+    _onRequest();
 
     /// 调用Native获取位置信息
     _methodChannel.setMethodCallHandler((MethodCall call) => Future(() {

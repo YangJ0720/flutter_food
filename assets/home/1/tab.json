@@ -28,7 +28,7 @@
       "sales": 268,
       "starting_price": 20,
       "delivery_fee": 1.5,
-      "professional_delivery": false,
+      "professional_delivery": true,
       "arrival_time": "40分钟",
       "distance": "2.5km",
       "summary": "挺好吃的，味道不错，价格实惠",
