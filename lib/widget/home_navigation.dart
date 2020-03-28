@@ -19,15 +19,12 @@ class HomeNavigation extends StatelessWidget {
   }
 
   Widget _create(BuildContext context, HomeNavigationModel model) {
+    TextStyle style = TextStyle(fontSize: 11, color: Colors.black87);
     return GestureDetector(
       child: Column(
         children: <Widget>[
-          CachedNetworkImage(
-            width: 50,
-            height: 50,
-            imageUrl: model.url,
-          ),
-          Text(model.label),
+          CachedNetworkImage(width: 50, height: 50, imageUrl: model.url),
+          Text(model.label, style: style),
         ],
       ),
       onTap: () {

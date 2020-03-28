@@ -15,16 +15,7 @@ class HomeTabView extends StatefulWidget {
 }
 
 class HomeTabViewState extends State<HomeTabView> {
-
-  bool _isEmpty() {
-    List<HomeTabModel> list = widget.list;
-    return list == null || list.isEmpty;
-  }
-
   List<Widget> _createTabView() {
-    if (_isEmpty()) {
-      return List<Widget>();
-    }
     List<HomeTabModel> list = widget.list;
     List<Widget> tabViews = List();
     list.forEach((i) => tabViews.add(_createTabContent(i)));
@@ -37,7 +28,6 @@ class HomeTabViewState extends State<HomeTabView> {
 
   @override
   Widget build(BuildContext context) {
-
     return TabBarView(
         children: _createTabView(), controller: widget.tabController);
   }

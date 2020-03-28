@@ -1,4 +1,11 @@
 class HomeTabViewModel {
+
+  static const int TYPE_NORMAL = 0;
+  static const int TYPE_NEW = 1;
+  static const int TYPE_BRAND = 2;
+  /// 店铺类型（0：普通，1：新店，2：品牌）
+  final int type;
+
   /// 商品图片
   final String icon;
 
@@ -33,6 +40,7 @@ class HomeTabViewModel {
   final List<dynamic> labels;
 
   HomeTabViewModel(
+      this.type,
       this.icon,
       this.name,
       this.star,
@@ -46,6 +54,7 @@ class HomeTabViewModel {
       this.labels);
 
   factory HomeTabViewModel.fromJson(Map<String, dynamic> map) {
+    var type = map['type'];
     var icon = map['icon'];
     var name = map['name'];
     var star = map['star'];
@@ -58,6 +67,7 @@ class HomeTabViewModel {
     var summary = map['summary'];
     var labels = map['labels'];
     return HomeTabViewModel(
+        type,
         icon,
         name,
         star,

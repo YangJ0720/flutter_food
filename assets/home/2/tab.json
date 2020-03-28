@@ -3,6 +3,7 @@
   "msg": "success",
   "data": [
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -22,13 +23,14 @@
       ]
     },
     {
+      "type": 1,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
       "sales": 268,
       "starting_price": 20,
       "delivery_fee": 1.5,
-      "professional_delivery": false,
+      "professional_delivery": true,
       "arrival_time": "40分钟",
       "distance": "2.5km",
       "summary": "挺好吃的，味道不错，价格实惠",
@@ -42,6 +44,7 @@
       ]
     },
     {
+      "type": 2,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -61,6 +64,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -80,6 +84,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -99,6 +104,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -118,6 +124,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -137,6 +144,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -156,6 +164,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -175,6 +184,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -194,6 +204,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -213,6 +224,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -232,6 +244,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -251,6 +264,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -270,6 +284,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -289,6 +304,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -308,6 +324,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -327,6 +344,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -346,6 +364,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -365,6 +384,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -384,6 +404,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -403,6 +424,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -422,6 +444,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -441,6 +464,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -460,6 +484,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -479,6 +504,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -498,6 +524,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -517,6 +544,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -536,6 +564,7 @@
       ]
     },
     {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,
@@ -555,25 +584,7 @@
       ]
     },
     {
-      "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
-      "name": "红荔村肠粉",
-      "star": 4.8,
-      "sales": 268,
-      "starting_price": 20,
-      "delivery_fee": 1.5,
-      "professional_delivery": false,
-      "arrival_time": "40分钟",
-      "distance": "2.5km",
-      "summary": "挺好吃的，味道不错，价格实惠",
-      "labels": [
-        "25减22",
-        "70减46",
-        "105减69",
-        "142减92",
-        "190减105"
-      ]
-    },
-    {
+      "type": 0,
       "icon": "http://i5.chuimg.com/947f31870021410785a53718785507a4_3024w_4031h.jpg@2o_50sh_1pr_1l_215w_136h_1c_1e_90q_1wh",
       "name": "红荔村肠粉",
       "star": 4.8,

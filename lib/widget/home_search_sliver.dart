@@ -2,15 +2,40 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class HomeSearchSliver extends SliverPersistentHeaderDelegate {
+class HomeSearchSliver extends StatefulWidget {
+  final String _address;
+
+  HomeSearchSliver(this._address);
+
+  @override
+  State<StatefulWidget> createState() {
+    return HomeSearchSliverState();
+  }
+}
+
+class HomeSearchSliverState extends State<HomeSearchSliver> {
+  @override
+  Widget build(BuildContext context) {
+    return SliverPersistentHeader(
+      delegate: HomeSearchDelegate(widget._address),
+      pinned: true,
+    );
+  }
+}
+
+class HomeSearchDelegate extends SliverPersistentHeaderDelegate {
   final double _padding = MediaQueryData.fromWindow(window).padding.top;
 
   final double _minExtent = 50;
 
-  final double _alpha;
   final String _address;
 
-  HomeSearchSliver(this._alpha, this._address);
+  HomeSearchDelegate(this._address);
+
+  double _convertAlpha(double shrinkOffset) {
+    double offset = shrinkOffset / (maxExtent - minExtent);
+    return offset > 1 ? 0 : 1 - offset;
+  }
 
   @override
   Widget build(
@@ -23,7 +48,7 @@ class HomeSearchSliver extends SliverPersistentHeaderDelegate {
           Expanded(
               child: Container(
             child: Opacity(
-              opacity: _alpha,
+              opacity: _convertAlpha(shrinkOffset),
               child: Row(
                 children: <Widget>[
                   Container(
@@ -58,7 +83,10 @@ class HomeSearchSliver extends SliverPersistentHeaderDelegate {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(Icons.search, color: Colors.grey),
+                  Padding(
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    child: Image.asset('images/ahh.png', width: 15, height: 15),
+                  ),
                   Text('海底捞', style: TextStyle(color: Colors.grey))
                 ],
               ),

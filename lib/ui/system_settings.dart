@@ -16,9 +16,7 @@ class SystemSettingsState extends State<SystemSettings> {
         leading: Builder(builder: (context) {
           return IconButton(
               icon: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
+              onPressed: () => {Navigator.pop(context)},
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip);
         }),
         title: Text('设置', style: TextStyle(color: Colors.black)),

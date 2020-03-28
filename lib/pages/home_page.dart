@@ -1,15 +1,19 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food/model/home_model.dart';
 import 'package:food/widget/home_banner.dart';
+import 'package:food/widget/home_discount.dart';
+import 'package:food/widget/home_discount_grid.dart';
 import 'package:food/widget/home_grid_nav.dart';
 import 'package:food/widget/home_navigation.dart';
 import 'package:food/widget/home_search_sliver.dart';
 import 'package:food/widget/home_tab_bar.dart';
 import 'package:food/widget/home_tab_view.dart';
+import 'package:food/widget/load_view.dart';
 
 /// 首页
 class HomePage extends StatefulWidget {
@@ -30,21 +34,8 @@ class HomeState extends State
   ///
   HomeModel _homeModel = HomeModel();
 
-  /// 标题栏透明度
-  double _alpha = 1;
-
   /// 用户位置信息
   String _address = '';
-
-  void _onScroll(double pixels) {
-    double value = pixels / 50;
-    if (value > 1) {
-      value = 1;
-    }
-    setState(() {
-      _alpha = 1 - value;
-    });
-  }
 
   void _onRequest() async {
     var url =
@@ -89,40 +80,47 @@ class HomeState extends State
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return NotificationListener(
-      onNotification: (notification) {
-        if (notification is ScrollUpdateNotification &&
-            notification.depth == 0) {
-          _onScroll(notification.metrics.pixels);
-        }
-        return false;
-      },
-      child: DefaultTabController(
-        length: _homeModel.tab == null ? 0 : _homeModel.tab.length,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            SliverPersistentHeader(
-              delegate: HomeSearchSliver(_alpha, _address),
-              pinned: true,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: _tabController == null
+          ? LoadView()
+          : DefaultTabController(
+              length: _homeModel.tab.length,
+              child: NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  HomeSearchSliver(_address),
+                  HomeDiscount(
+                    url:
+                        'https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/a11.jpg',
+                  ),
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      HomeBanner(banner: _homeModel.banner),
+                      HomeNavigation(list: _homeModel.navigation)
+                    ]),
+                  ),
+                  HomeGridNav(numColumns: 5, list: _homeModel.gridNav),
+                  SliverToBoxAdapter(
+                      child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      '优惠专区',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  )),
+                  HomeDiscountGrid(),
+                  HomeTabBar(
+                    list: _homeModel.tab,
+                    tabController: _tabController,
+                  )
+                ],
+                body: HomeTabView(
+                  list: _homeModel.tab,
+                  tabController: _tabController,
+                ),
+              ),
             ),
-            SliverList(
-              delegate: SliverChildListDelegate([
-                HomeBanner(banner: _homeModel.banner),
-                HomeNavigation(list: _homeModel.navigation)
-              ]),
-            ),
-            HomeGridNav(numColumns: 5, list: _homeModel.gridNav),
-            HomeTabBar(
-              list: _homeModel.tab,
-              tabController: _tabController,
-            ),
-          ],
-          body: HomeTabView(
-            list: _homeModel.tab,
-            tabController: _tabController,
-          ),
-        ),
-      ),
     );
   }
 

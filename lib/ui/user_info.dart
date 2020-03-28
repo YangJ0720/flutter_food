@@ -51,7 +51,10 @@ class UserInfoState extends State<UserInfo> {
         backgroundColor: Colors.white,
         title: Text('个人资料', style: TextStyle(color: Colors.black)),
         centerTitle: true,
-        leading: Icon(Icons.keyboard_arrow_left, color: Colors.black),
+        leading: IconButton(
+          icon: Icon(Icons.keyboard_arrow_left, color: Colors.black),
+          onPressed: () => {Navigator.pop(context)},
+        ),
       ),
       body: ListView(
         children: <Widget>[

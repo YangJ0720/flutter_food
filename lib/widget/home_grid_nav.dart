@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/model/home_grid_nav_model.dart';
 
@@ -18,11 +19,15 @@ class HomeGridNavState extends State<HomeGridNav> {
   List<Widget> _createItem() {
     List<Widget> list = List();
     if (widget.list != null && widget.list.isNotEmpty) {
+      TextStyle style = TextStyle(color: Colors.black87, fontSize: 11);
       widget.list.forEach((i) {
         list.add(Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[Icon(Icons.home), Text(i.label)],
+          children: <Widget>[
+            CachedNetworkImage(imageUrl: i.url, width: 25, height: 25),
+            Text(i.label, style: style)
+          ],
         ));
       });
     }

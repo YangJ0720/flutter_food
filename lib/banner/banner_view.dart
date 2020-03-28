@@ -120,10 +120,10 @@ class BannerViewState extends State<BannerView> {
     List<Widget> _list = [];
     for (int i = 0; i < _realCount; i++) {
       var item = Container(
-        margin: EdgeInsets.all(5),
-        width: 20,
+        margin: EdgeInsets.fromLTRB(2, 5, 2, 5),
+        width: 12,
         height: 1,
-        color: _indicator == i ? Colors.white : Color(0xFFADADAD),
+        color: _indicator == i ? Colors.white : Color(0x80F8F8FF),
       );
       _list.add(item);
     }

@@ -11,6 +11,8 @@ class OrderPage extends StatefulWidget {
 }
 
 class OrderState extends State with AutomaticKeepAliveClientMixin {
+  var _isExpanded = false;
+
   @override
   void initState() {
     print('initState -> OrderPage');
@@ -20,60 +22,21 @@ class OrderState extends State with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverPersistentHeader(delegate: HomeSearchSliver(1, ''), pinned: true),
-        SliverFillRemaining(
-          child: Container(
-            height: 800,
-            child: Center(child: Text('data')),
-          ),
-        )
-      ],
+    return Scaffold(
+      body: Center(child: Wrap(children: <Widget>[
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+        Padding(padding: EdgeInsets.all(20), child: Text('data', style: TextStyle(backgroundColor: Colors.pink),),),
+      ],),),
     );
   }
 
   @override
   bool get wantKeepAlive => true;
-}
-
-class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Colors.blueAccent, Colors.blue, Colors.lightBlue])),
-        ),
-        Container(
-          height: 50,
-          child: Row(
-            children: <Widget>[
-              Center(
-                child: Text('data'),
-              )
-            ],
-          ),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), color: Colors.pink),
-        )
-      ],
-      alignment: Alignment.bottomCenter,
-    );
-  }
-
-  @override
-  double get maxExtent => 200;
-
-  @override
-  double get minExtent => 50 + MediaQueryData.fromWindow(window).padding.top;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
-  }
 }

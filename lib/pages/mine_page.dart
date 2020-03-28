@@ -50,10 +50,13 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
             Border(bottom: BorderSide(width: 0.1, color: Color(0xFF999999))),
       ),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
+        padding: EdgeInsets.all(15),
         child: Row(
           children: <Widget>[
-            Container(width: 40, height: 40, child: Image.asset(path)),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Image.asset(path, width: 25, height: 25),
+            ),
             Expanded(child: Text(text)),
             Icon(Icons.chevron_right, color: Colors.grey)
           ],
@@ -102,13 +105,14 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
                 MineCard('钱包', null, '金币、借钱、福利'),
               ],
             ),
-            _createItem('images/bdr.png', '我的收藏'),
-            _createItem('images/bdr.png', '我的客服'),
-            _createItem('images/bdr.png', '推荐有奖'),
-            _createItem('images/bdr.png', '商务合作'),
-            _createItem('images/bdr.png', '办卡有礼'),
+            _createItem('images/bdt.png', '我的收藏'),
+            _createItem('images/bdy.png', '我的客服'),
+            _createItem('images/bdl.png', '我的地址'),
+            _createItem('images/bdu.png', '推荐有奖'),
+            _createItem('images/bdi.png', '商务合作'),
+            _createItem('images/bdo.png', '办卡有礼'),
             _createItem('images/bdr.png', '3小时公益'),
-            _createItem('images/bdr.png', '企业订餐'),
+            _createItem('images/bdp.png', '企业订餐'),
             Container(color: Colors.white70, height: 80),
           ],
         ),

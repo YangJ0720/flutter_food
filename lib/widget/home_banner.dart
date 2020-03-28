@@ -31,17 +31,21 @@ class HomeBannerState extends State {
 
   @override
   void initState() {
-    _banner.add(_createItem('https://img4.mukewang.com/540e57300001d6d906000338-240-135.jpg'));
-    _banner.add(_createItem('https://img3.mukewang.com/5ce4b199083e469306000338-240-135.jpg'));
-    _banner.add(_createItem('https://img.mukewang.com/5dd7561309f8ae4806000338-240-135.png'));
-    _banner.add(_createItem('https://img4.mukewang.com/5de8a5740989152106000338-240-135.png'));
+    _banner.add(_createItem('https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/banner/9JBHlnd_VeeOmCACOva2qIFFhrU!MA.jpg'));
+    _banner.add(_createItem('https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/banner/AYV09JvHTIjtTxpRwk8jLy59V8s!MA.jpg'));
+    _banner.add(_createItem('https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/banner/5mJ7NzI1J18yMWRocHGJ4pxpJzw!MA.jpg'));
+    _banner.add(_createItem('https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/banner/vYrYdiA0zzgGTVwUtc_L_H-9_Tg!MA.jpg'));
+    _banner.add(_createItem('https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/banner/1RLegowqEegjye6EzkCAYkc8GA0!MA.jpg'));
+    _banner.add(_createItem('https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/banner/Bfmo4Dj0VumFJhqoxtCACVtG67M!MA.jpg'));
+    _banner.add(_createItem('https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/banner/7n_kaBKJhaUpRy7u_IugUYjrv54!MA.jpg'));
+    _banner.add(_createItem('https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/banner/4-yH3U0jvHYw0p-FsNhpkUyFlwQ!MA.jpg'));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      margin: EdgeInsets.all(10),
       child: BannerView(
         items: _banner,
       ),
