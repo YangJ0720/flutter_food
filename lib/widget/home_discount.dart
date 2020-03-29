@@ -9,9 +9,14 @@ class HomeDiscount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Container(
-        child: CachedNetworkImage(imageUrl: url),
-        margin: EdgeInsets.only(left: 5, right: 5),
+      child: GestureDetector(
+        child: Container(
+          child: CachedNetworkImage(imageUrl: url),
+          margin: EdgeInsets.only(left: 5, right: 5),
+        ),
+        onTap: () {
+          print('click -> $url');
+        },
       ),
     );
   }

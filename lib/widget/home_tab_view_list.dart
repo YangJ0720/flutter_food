@@ -107,12 +107,16 @@ class HomeTabViewListState extends State<HomeTabViewList> {
                   _createText(model.distance)
                 ],
               ),
-              Text(
-                model.summary,
-                style: TextStyle(
-                    fontSize: 11,
-                    color: Colors.orange,
-                    backgroundColor: Color(0xFFFFEFD5)),
+              Container(
+                child: Text(
+                  model.summary,
+                  style: TextStyle(fontSize: 11, color: Colors.orange),
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFEFD5),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                padding: EdgeInsets.only(left: 5, right: 5),
               ),
               Divider(height: 20)
             ], crossAxisAlignment: CrossAxisAlignment.start)),

@@ -1,51 +1,41 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:food/model/home_discount_grid_model.dart';
 
 class HomeDiscountGrid extends StatelessWidget {
   final String title;
+  final List<HomeDiscountGridModel> list;
 
-  const HomeDiscountGrid({Key key, this.title}) : super(key: key);
+  const HomeDiscountGrid({Key key, this.title, this.list}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-//    return SliverToBoxAdapter(
-//      child: Container(
-//        child: Column(
-//          children: <Widget>[
-//            Text(title),
-//            SliverGrid.count(
-//              crossAxisCount: 2,
-//              children: <Widget>[
-//                Container(color: Colors.pink, height: 200),
-//                Container(color: Colors.orange, height: 200),
-//              ],
-//            )
-//          ],
-//        ),
-//        margin: EdgeInsets.only(left: 5, right: 5),
-//      ),
-//    );
     return SliverGrid.count(
       crossAxisCount: 2,
       crossAxisSpacing: 5,
-      mainAxisSpacing: 50,
+      childAspectRatio: 1.5,
       children: <Widget>[
         Container(
-            decoration: BoxDecoration(
-              color: Colors.pink,
-              borderRadius: BorderRadius.circular(5),
-            ),
-          width: 50,
-          height: 50,
+          child: Stack(
+            alignment: FractionalOffset(0.5, 0),
+            children: <Widget>[
+              ClipRRect(
+                child:
+                    CachedNetworkImage(fit: BoxFit.fill, imageUrl: list[0].url),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              Text('限时秒杀', style: TextStyle(backgroundColor: Colors.pink)),
+            ],
+          ),
+          margin: EdgeInsets.only(left: 10),
         ),
         Container(
           decoration: BoxDecoration(
             color: Colors.orange,
             borderRadius: BorderRadius.circular(5),
           ),
-          width: 50,
-          height: 50,
-        ),
+          margin: EdgeInsets.only(right: 10),
+        )
       ],
     );
   }

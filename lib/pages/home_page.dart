@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +8,7 @@ import 'package:food/widget/home_banner.dart';
 import 'package:food/widget/home_discount.dart';
 import 'package:food/widget/home_discount_grid.dart';
 import 'package:food/widget/home_grid_nav.dart';
+import 'package:food/widget/home_list_tile.dart';
 import 'package:food/widget/home_navigation.dart';
 import 'package:food/widget/home_search_sliver.dart';
 import 'package:food/widget/home_tab_bar.dart';
@@ -89,27 +89,27 @@ class HomeState extends State
               child: NestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
                   HomeSearchSliver(_address),
-                  HomeDiscount(
-                    url:
-                        'https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/images/a11.jpg',
-                  ),
+                  HomeDiscount(url: _homeModel.discount),
                   SliverList(
                     delegate: SliverChildListDelegate([
                       HomeBanner(banner: _homeModel.banner),
                       HomeNavigation(list: _homeModel.navigation)
                     ]),
                   ),
+
+                  /// 网格导航
                   HomeGridNav(numColumns: 5, list: _homeModel.gridNav),
+
+                  /// 优惠专区
+                  HomeListTile(title: '优惠专区'),
+                  HomeDiscountGrid(list: _homeModel.discountGrid),
+
+                  /// 广告轮播图
                   SliverToBoxAdapter(
-                      child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text(
-                      '优惠专区',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  )),
-                  HomeDiscountGrid(),
+                    child: HomeBanner(banner: _homeModel.ad),
+                  ),
+
+                  /// 选项卡
                   HomeTabBar(
                     list: _homeModel.tab,
                     tabController: _tabController,

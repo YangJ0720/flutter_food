@@ -40,10 +40,13 @@ class HomeNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: _item(context),
+    return Padding(
+      padding: EdgeInsets.only(top: 10, bottom: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: _item(context),
+      ),
     );
   }
 }

@@ -18,27 +18,29 @@ class HomeGridNav extends StatefulWidget {
 class HomeGridNavState extends State<HomeGridNav> {
   List<Widget> _createItem() {
     List<Widget> list = List();
-    if (widget.list != null && widget.list.isNotEmpty) {
-      TextStyle style = TextStyle(color: Colors.black87, fontSize: 11);
-      widget.list.forEach((i) {
-        list.add(Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CachedNetworkImage(imageUrl: i.url, width: 25, height: 25),
-            Text(i.label, style: style)
-          ],
-        ));
-      });
-    }
+    TextStyle style = TextStyle(color: Colors.black87, fontSize: 11);
+    widget.list.forEach((i) {
+      list.add(Column(
+        children: <Widget>[
+          CachedNetworkImage(imageUrl: i.url, width: 25, height: 25),
+          Text(i.label, style: style)
+        ],
+        mainAxisAlignment: MainAxisAlignment.center,
+      ));
+    });
     return list;
   }
 
   @override
   Widget build(BuildContext context) {
-    return SliverGrid.count(
-      crossAxisCount: widget.numColumns,
-      children: _createItem(),
+    return SliverPadding(
+      padding: EdgeInsets.all(10),
+      sliver: SliverGrid.count(
+        crossAxisCount: widget.numColumns,
+        children: _createItem(),
+        childAspectRatio: 1.5,
+        mainAxisSpacing: 10,
+      ),
     );
   }
 }
