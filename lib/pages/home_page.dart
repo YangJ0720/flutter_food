@@ -7,6 +7,7 @@ import 'package:food/model/home_model.dart';
 import 'package:food/widget/home_banner.dart';
 import 'package:food/widget/home_discount.dart';
 import 'package:food/widget/home_discount_grid.dart';
+import 'package:food/widget/home_exclusive_grid.dart';
 import 'package:food/widget/home_grid_nav.dart';
 import 'package:food/widget/home_list_tile.dart';
 import 'package:food/widget/home_navigation.dart';
@@ -101,8 +102,18 @@ class HomeState extends State
                   HomeGridNav(numColumns: 5, list: _homeModel.gridNav),
 
                   /// 优惠专区
-                  HomeListTile(title: '优惠专区'),
+                  HomeListTile(
+                    title: '优惠专区',
+                    padding: EdgeInsets.only(left: 10, bottom: 10),
+                  ),
                   HomeDiscountGrid(list: _homeModel.discountGrid),
+
+                  /// 专属优惠
+                  HomeListTile(
+                    title: '专属·午后时光',
+                    padding: EdgeInsets.only(left: 10, top:10, bottom: 10),
+                  ),
+                  HomeExclusiveGrid(list: _homeModel.exclusiveGrid),
 
                   /// 广告轮播图
                   SliverToBoxAdapter(

@@ -1,3 +1,4 @@
+import 'package:food/model/home_exclusive_grid_model.dart';
 import 'package:food/model/home_grid_nav_model.dart';
 import 'package:food/model/home_tab_model.dart';
 
@@ -11,6 +12,7 @@ class HomeModel {
   List<HomeNavigationModel> navigation = List();
   List<HomeGridNavModel> gridNav = List();
   List<HomeDiscountGridModel> discountGrid = List();
+  List<HomeExclusiveGridModel> exclusiveGrid = List();
   List<String> ad = List();
   List<HomeTabModel> tab = List();
 
@@ -20,6 +22,7 @@ class HomeModel {
       this.navigation,
       this.gridNav,
       this.discountGrid,
+      this.exclusiveGrid,
       this.ad,
       this.tab]);
 
@@ -46,6 +49,12 @@ class HomeModel {
     List<HomeDiscountGridModel> discountGrid =
         discountGridJson.map((i) => HomeDiscountGridModel.fromJson(i)).toList();
 
+    /// 专属优惠
+    List<dynamic> exclusiveGridJson = json['exclusiveGrid'];
+    List<HomeExclusiveGridModel> exclusiveGrid = exclusiveGridJson
+        .map((i) => HomeExclusiveGridModel.fromJson(i))
+        .toList();
+
     /// 广告轮播图
     List<dynamic> adList = json['ad'];
     List<String> ad = adList.map((i) => i['url'].toString()).toList();
@@ -54,7 +63,7 @@ class HomeModel {
     List<dynamic> tabsJson = json['tabs'];
     List<HomeTabModel> tabs =
         tabsJson.map((i) => HomeTabModel.fromJson(i)).toList();
-    return HomeModel(
-        discount, urls, navigation, gridNav, discountGrid, ad, tabs);
+    return HomeModel(discount, urls, navigation, gridNav, discountGrid,
+        exclusiveGrid, ad, tabs);
   }
 }

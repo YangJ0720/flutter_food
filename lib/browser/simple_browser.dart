@@ -38,7 +38,7 @@ class _SimpleBrowserState extends State<SimpleBrowser> {
               print('onPageFinished -> $url');
             },
           ),
-          _isFinish ? Container() : Center(child: CircularProgressIndicator())
+          _isFinish ? Container() : LinearProgressIndicator()
         ],
       ),
     );
