@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/banner/banner_view.dart';
+import 'package:food/browser/simple_browser.dart';
+import 'package:food/ui/undone_show.dart';
 
 class HomeBanner extends StatefulWidget {
   final List<String> banner;
@@ -18,14 +20,21 @@ class HomeBannerState extends State<HomeBanner> {
   final List<Widget> _banner = List();
 
   Widget _createItem(String url) {
-    return ClipRRect(
-      child: CachedNetworkImage(
-        imageUrl: url,
-        fit: BoxFit.fill,
-        placeholder: (context, url) =>
-            Center(child: CircularProgressIndicator()),
+    return GestureDetector(
+      child: ClipRRect(
+        child: CachedNetworkImage(
+          imageUrl: url,
+          fit: BoxFit.fill,
+          placeholder: (context, url) =>
+              Center(child: CircularProgressIndicator()),
+        ),
+        borderRadius: BorderRadius.circular(5),
       ),
-      borderRadius: BorderRadius.circular(5),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (_) {
+          return SimpleBrowser('banner', url);
+        }));
+      },
     );
   }
 

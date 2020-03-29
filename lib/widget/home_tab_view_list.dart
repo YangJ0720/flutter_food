@@ -41,7 +41,6 @@ class HomeTabViewListState extends State<HomeTabViewList> {
   Widget _createItem(HomeTabViewModel model) {
     return GestureDetector(
       child: Container(
-        margin: EdgeInsets.only(left: 10, right: 10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -122,6 +121,7 @@ class HomeTabViewListState extends State<HomeTabViewList> {
             ], crossAxisAlignment: CrossAxisAlignment.start)),
           ],
         ),
+        margin: EdgeInsets.only(left: 10, right: 10),
       ),
       onTap: () {
         Navigator.of(context).push(

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/model/home_grid_nav_model.dart';
+import 'package:food/ui/undone_show.dart';
 
 /// 首页 -> 网格导航
 class HomeGridNav extends StatefulWidget {
@@ -20,12 +21,19 @@ class HomeGridNavState extends State<HomeGridNav> {
     List<Widget> list = List();
     TextStyle style = TextStyle(color: Colors.black87, fontSize: 11);
     widget.list.forEach((i) {
-      list.add(Column(
-        children: <Widget>[
-          CachedNetworkImage(imageUrl: i.url, width: 25, height: 25),
-          Text(i.label, style: style)
-        ],
-        mainAxisAlignment: MainAxisAlignment.center,
+      list.add(GestureDetector(
+        child: Column(
+          children: <Widget>[
+            CachedNetworkImage(imageUrl: i.url, width: 25, height: 25),
+            Text(i.label, style: style)
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return UndoneShow(i.label);
+          }));
+        },
       ));
     });
     return list;
