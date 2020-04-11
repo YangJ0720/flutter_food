@@ -13,13 +13,15 @@ class StoreSearchSliverState extends State<StoreSearchSliver> {
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
-      pinned: true,
       delegate: _StoreSearchDelegate(),
+      pinned: true,
     );
   }
 }
 
 class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
+  var paddingTop = MediaQueryData.fromWindow(window).padding.top;
+
   Color _makeStickyColorByIcon(double shrinkOffset) {
     if (shrinkOffset <= minExtent) {
       return Colors.white;
@@ -89,7 +91,7 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Stack(
+    return SafeArea(child: Stack(
       children: <Widget>[
         Container(
           child: Image.asset('images/aeg.jpg',
@@ -127,11 +129,11 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
             right: 0)
       ],
       fit: StackFit.expand,
-    );
+    ));
   }
 
   @override
-  double get maxExtent => 200;
+  double get maxExtent => 200 + paddingTop;
 
   @override
   double get minExtent => 50;

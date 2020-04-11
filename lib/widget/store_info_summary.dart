@@ -30,9 +30,7 @@ class StoreInfoSummaryState extends State<StoreInfoSummary> {
               padding: EdgeInsets.all(10),
               child: Text('月售${widget.model.sales}'),
             ),
-            Text(widget.model.professional_delivery
-                ? '蜂鸟专送${widget.model.arrival_time}'
-                : '蜂鸟快送${widget.model.arrival_time}')
+            Text('蜂鸟${widget.model.professional_delivery ? '专' : '快'}送')
           ],
         ),
         Row(
@@ -45,11 +43,7 @@ class StoreInfoSummaryState extends State<StoreInfoSummary> {
                     Text('¥8'),
                     Row(
                       children: <Widget>[
-                        Image.asset(
-                          'images/ai7.png',
-                          width: 20,
-                          height: 10,
-                        ),
+                        Image.asset('images/ai7.png', width: 20, height: 10),
                         Text('无门槛')
                       ],
                     ),
@@ -86,22 +80,6 @@ class StoreInfoSummaryState extends State<StoreInfoSummary> {
               ),
             )
           ],
-        ),
-        ExpansionTile(
-          backgroundColor: Colors.black,
-          onExpansionChanged: (b) {
-            print('b = $b');
-          },
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text(
-                '5个优惠',
-                style: TextStyle(color: Colors.black, fontSize: 10),
-              )
-            ],
-          ),
-          children: <Widget>[Container(color: Colors.deepOrange, height: 100)],
         ),
       ]),
     );

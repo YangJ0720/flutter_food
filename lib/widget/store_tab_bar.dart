@@ -22,11 +22,15 @@ class StoreTabBarState extends State<StoreTabBar> {
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
-        delegate: _StoreTabBarSliver(TabBar(
-          tabs: _createTabBar(),
-          labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey,
-        )),
+        delegate: _StoreTabBarSliver(
+          TabBar(
+            tabs: _createTabBar(),
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorWeight: 2.5,
+          ),
+        ),
         pinned: true);
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:food/config/network_config.dart';
 import 'package:food/model/find_model.dart';
 import 'package:food/widget/find_tab.dart';
 import 'package:food/widget/find_tab_view.dart';
@@ -26,10 +27,9 @@ class FindState extends State
   }
 
   void _onRequest() async {
-    var url =
-        'https://gitee.com/YangJ0720/flutter_takeout/raw/af5f2602bd92d9b82a9f304b1252efd2332c4e7f/flutter_takeout/assets/find.json';
+    var url = '${NetworkConfig.HOST_URL}assets/find.json';
     Response response = await Dio().get(url);
-    if (200 == response.statusCode) {
+    if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
       List<dynamic> data = json.decode(response.data)['data'];
       List<FindModel> list = data.map((i) => FindModel.fromJson(i)).toList();
       setState(() {

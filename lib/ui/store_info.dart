@@ -26,7 +26,7 @@ class StoreInfoState extends State<StoreInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: NotificationListener(
+      body: SafeArea(child: NotificationListener(
         child: DefaultTabController(
           length: _tabs.length,
           child: NestedScrollView(
@@ -46,7 +46,7 @@ class StoreInfoState extends State<StoreInfo> {
             ),
           ),
         ),
-      ),
+      ),),
     );
   }
 }

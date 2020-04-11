@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food/config/network_config.dart';
 import 'package:food/model/home_model.dart';
 import 'package:food/widget/home_banner.dart';
 import 'package:food/widget/home_discount.dart';
@@ -39,10 +40,9 @@ class HomeState extends State
   String _address = '';
 
   void _onRequest() async {
-    var url =
-        'https://gitee.com/YangJ0720/flutter_takeout/raw/master/flutter_takeout/assets/home.json';
+    var url = '${NetworkConfig.HOST_URL}assets/home.json';
     Response response = await Dio().get(url);
-    if (200 == response.statusCode) {
+    if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
       Map<String, dynamic> data = json.decode(response.data)['data'];
       HomeModel model = HomeModel.fromJson(data);
       setState(() {
@@ -59,12 +59,8 @@ class HomeState extends State
     /// 调用Native获取位置信息
     _methodChannel.setMethodCallHandler((MethodCall call) => Future(() {
           String method = call.method;
-          if ("setLocation" == method) {
-            if (call.arguments is String) {
-              setState(() {
-                _address = call.arguments;
-              });
-            }
+          if ("setLocation" == method && call.arguments is String) {
+            setState(() => {_address = call.arguments});
           }
           return call.toString();
         }));
@@ -111,7 +107,7 @@ class HomeState extends State
                   /// 专属优惠
                   HomeListTile(
                     title: '专属·午后时光',
-                    padding: EdgeInsets.only(left: 10, top:10, bottom: 10),
+                    padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
                   ),
                   HomeExclusiveGrid(list: _homeModel.exclusiveGrid),
 

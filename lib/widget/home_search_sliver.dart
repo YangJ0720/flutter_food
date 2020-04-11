@@ -24,8 +24,6 @@ class HomeSearchSliverState extends State<HomeSearchSliver> {
 }
 
 class HomeSearchDelegate extends SliverPersistentHeaderDelegate {
-  final double _padding = MediaQueryData.fromWindow(window).padding.top;
-
   final double _minExtent = 50;
 
   final String _address;
@@ -46,39 +44,38 @@ class HomeSearchDelegate extends SliverPersistentHeaderDelegate {
       child: Column(
         children: <Widget>[
           Expanded(
-              child: Container(
-            child: Opacity(
-              opacity: _convertAlpha(shrinkOffset),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: Image.asset('images/ajk.png'),
-                      width: 30,
-                      height: 30),
-                  Expanded(
-                    child: Text(_address,
-                        maxLines: 1, overflow: TextOverflow.ellipsis),
-                  ),
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Icon(Icons.settings, color: Colors.grey)),
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Icon(Icons.sms, color: Colors.grey))
-                ],
+            child: Container(
+              child: Opacity(
+                opacity: _convertAlpha(shrinkOffset),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: Image.asset('images/ajk.png'),
+                        width: 30,
+                        height: 30),
+                    Expanded(
+                      child: Text(_address,
+                          maxLines: 1, overflow: TextOverflow.ellipsis),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: Icon(Icons.settings, color: Colors.grey)),
+                    Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: Icon(Icons.sms, color: Colors.grey))
+                  ],
+                ),
               ),
+              color: Colors.white,
             ),
-            color: Colors.white,
-          )),
+          ),
           Container(
             height: _minExtent,
-            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+            margin: EdgeInsets.only(left: 10, right: 10),
+            padding: EdgeInsets.only(top: 5, bottom: 5),
             child: FlatButton(
-              onPressed: () {
-                print('click');
-              },
+              onPressed: () => {print('click')},
               color: Color(0xFFF0F0F0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -100,10 +97,10 @@ class HomeSearchDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 120;
+  double get maxExtent => 100;
 
   @override
-  double get minExtent => _minExtent + _padding;
+  double get minExtent => _minExtent;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {

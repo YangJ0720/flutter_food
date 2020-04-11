@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/model/home_exclusive_grid_model.dart';
 import 'package:food/ui/undone_show.dart';
+import 'package:food/widget/wrap_cache_image.dart';
 
 class HomeExclusiveGrid extends StatelessWidget {
   final String title;
@@ -9,15 +10,21 @@ class HomeExclusiveGrid extends StatelessWidget {
 
   const HomeExclusiveGrid({Key key, this.title, this.list}) : super(key: key);
 
+  void _onClick(BuildContext context, String label) {
+    PageRoute route = MaterialPageRoute(builder: (_) => UndoneShow(label));
+    Navigator.push(context, route);
+  }
+
   Widget _createItem(BuildContext context, HomeExclusiveGridModel model,
       EdgeInsets margin, TextStyle style) {
+    BorderRadius borderRadius = BorderRadius.circular(5);
     return GestureDetector(
       child: Container(
         child: Stack(
           children: <Widget>[
             ClipRRect(
-              child: CachedNetworkImage(fit: BoxFit.fill, imageUrl: model.url),
-              borderRadius: BorderRadius.circular(5),
+              child: WrapCacheImage(url: model.url),
+              borderRadius: borderRadius,
             ),
             Column(
               children: <Widget>[
@@ -37,7 +44,8 @@ class HomeExclusiveGrid extends StatelessWidget {
                     ],
                   ),
                   decoration:
-                      BoxDecoration(color: Color.fromARGB(245, 238, 238, 238)),
+                      BoxDecoration(color: Color.fromARGB(245, 238, 238, 238),
+                      borderRadius: borderRadius),
                   padding: EdgeInsets.only(left: 10, top: 5, bottom: 5),
                 ),
               ],
@@ -48,11 +56,7 @@ class HomeExclusiveGrid extends StatelessWidget {
         ),
         margin: margin,
       ),
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return UndoneShow(model.label);
-        }));
-      },
+      onTap: () => {_onClick(context, model.label)},
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/model/home_discount_grid_model.dart';
 import 'package:food/ui/undone_show.dart';
+import 'package:food/widget/wrap_cache_image.dart';
 
 class HomeDiscountGrid extends StatelessWidget {
   final String title;
@@ -16,7 +17,7 @@ class HomeDiscountGrid extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             ClipRRect(
-              child: CachedNetworkImage(fit: BoxFit.fill, imageUrl: model.url),
+              child: WrapCacheImage(url: model.url),
               borderRadius: BorderRadius.circular(5),
             ),
             Column(

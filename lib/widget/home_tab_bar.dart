@@ -26,6 +26,7 @@ class HomeTabBar extends StatelessWidget {
           isScrollable: true,
           labelColor: Colors.blue,
           labelStyle: TextStyle(fontWeight: FontWeight.bold),
+          indicatorSize: TabBarIndicatorSize.label,
           unselectedLabelColor: Colors.black,
           unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
         ),
