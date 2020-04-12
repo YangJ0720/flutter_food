@@ -66,9 +66,7 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
               margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
               padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
               child: FlatButton(
-                onPressed: () {
-                  print('click');
-                },
+                onPressed: () => {print('click')},
                 color: Color(0xFFF0F0F0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +89,8 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SafeArea(child: Stack(
+    return SafeArea(
+        child: Stack(
       children: <Widget>[
         Container(
           child: Image.asset('images/aeg.jpg',

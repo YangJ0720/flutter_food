@@ -26,27 +26,27 @@ class StoreInfoState extends State<StoreInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(child: NotificationListener(
-        child: DefaultTabController(
-          length: _tabs.length,
-          child: NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) => [
-              StoreSearchSliver(),
-              SliverToBoxAdapter(
-                child: StoreInfoSummary(widget.model),
-              ),
-              StoreTabBar(_tabs)
-            ],
-            body: TabBarView(
-              children: [
-                StoreTabViewOrder(),
-                StoreTabViewEvaluation(),
-                StoreTabViewBrand()
+      body: SafeArea(
+        child: NotificationListener(
+          child: DefaultTabController(
+            length: _tabs.length,
+            child: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                StoreSearchSliver(),
+                SliverToBoxAdapter(child: StoreInfoSummary(widget.model)),
+                StoreTabBar(_tabs)
               ],
+              body: TabBarView(
+                children: [
+                  StoreTabViewOrder(),
+                  StoreTabViewEvaluation(),
+                  StoreTabViewBrand()
+                ],
+              ),
             ),
           ),
         ),
-      ),),
+      ),
     );
   }
 }

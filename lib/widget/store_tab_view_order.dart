@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/config/network_config.dart';
+import 'package:food/widget/store_tab_view_order_details.dart';
 import 'package:food/widget/wrap_cache_image.dart';
 
 /// 商家详情 -> 点餐
@@ -11,6 +12,8 @@ class StoreTabViewOrder extends StatefulWidget {
 }
 
 class StoreTabViewOrderState extends State<StoreTabViewOrder> {
+  ScrollController _controller;
+
   Widget _createCard() {
     return Container(
       child: Column(
@@ -52,10 +55,11 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder> {
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5,
-                spreadRadius: 0.5,
-                offset: Offset(0, 1))
+              color: Colors.grey,
+              blurRadius: 5,
+              spreadRadius: 0.5,
+              offset: Offset(0, 1),
+            )
           ],
           color: Colors.white),
       width: 150,
@@ -66,43 +70,63 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder> {
 
   List<Widget> _createItem() {
     List<Widget> list = List();
-    list.add(Text('商家推荐'));
     list.add(
-      SingleChildScrollView(
-        child: Row(
-          children: <Widget>[
-            _createCard(),
-            _createCard(),
-            _createCard(),
-            _createCard(),
-            _createCard(),
-          ],
+      Padding(
+        padding: EdgeInsets.all(10),
+        child: Text(
+          '商家推荐',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        scrollDirection: Axis.horizontal,
+      ),
+    );
+    list.add(
+      Padding(
+        padding: EdgeInsets.only(left: 5, right: 5),
+        child: SingleChildScrollView(
+          child: Row(
+            children: <Widget>[
+              _createCard(),
+              _createCard(),
+              _createCard(),
+              _createCard(),
+              _createCard(),
+            ],
+          ),
+          scrollDirection: Axis.horizontal,
+        ),
       ),
     );
     var count = 100;
     for (int i = 0; i < count; i++) {
-      list.add(ListTile(title: Text('index = $i')));
+      list.add(ListTile(
+        title: Text('index = $i'),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (_) {
+            return StoreTabViewOrderDetails();
+          }));
+        },
+      ));
     }
     return list;
+  }
+
+  @override
+  void initState() {
+    _controller = ScrollController();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Expanded(
-          child: ListView(children: _createItem()),
-        ),
+        Expanded(child: ListView(children: _createItem())),
         Container(
           child: Row(
             children: <Widget>[
               Image.asset('images/a3n.png', width: 50, height: 50),
               FlatButton(
-                onPressed: () {
-                  print('');
-                },
+                onPressed: () => {print('')},
                 child: Text('¥20起送'),
                 color: Colors.black54,
               )
