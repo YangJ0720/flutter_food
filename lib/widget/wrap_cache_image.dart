@@ -7,7 +7,6 @@ class WrapCacheImage extends StatelessWidget {
   final double height;
   final BoxFit fit;
   final bool isPlaceholder;
-  final String asset;
 
   const WrapCacheImage(
       {Key key,
@@ -15,16 +14,12 @@ class WrapCacheImage extends StatelessWidget {
       this.width,
       this.height,
       this.fit = BoxFit.fill,
-      this.isPlaceholder = true,
-      this.asset = 'images/aal.png'})
+      this.isPlaceholder = true})
       : super(key: key);
 
   Widget _createView() {
     if (isPlaceholder) {
-      return Container(
-        color: Color(0xFFBEBEBE),
-        child: Center(child: Image.asset(asset, width: 120, height: 60)),
-      );
+      return Container(color: Color(0xFFF0F0F0));
     }
     return null;
   }

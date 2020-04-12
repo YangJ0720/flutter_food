@@ -134,7 +134,7 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
-          color: Colors.grey,
+          color: Color(0xFFBEBEBE),
           height: 50,
           padding: EdgeInsets.only(left: 5, right: 5),
         )
