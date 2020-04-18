@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:food/config/network_config.dart';
 import 'package:food/model/find_model.dart';
-import 'package:food/widget/find_tab.dart';
-import 'package:food/widget/find_tab_view.dart';
+import 'package:food/ui/find_tab.dart';
+import 'package:food/ui/find_tab_view.dart';
 
 /// 发现
 class FindPage extends StatefulWidget {

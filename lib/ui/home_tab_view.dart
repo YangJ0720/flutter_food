@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/model/home_tab_model.dart';
-import 'package:food/widget/home_tab_view_list.dart';
+import 'package:food/ui/home_tab_view_list.dart';
 
 class HomeTabView extends StatefulWidget {
   final List<HomeTabModel> list;

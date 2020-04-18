@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food/model/find_model.dart';
 import 'package:food/model/find_waterfall_model.dart';
+import 'package:food/ui/undone_show.dart';
 
 /// 发现 -> 瀑布流布局
 class FindTabViewWaterfall extends StatefulWidget {
@@ -85,7 +86,11 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
           ),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (_) {
+          return UndoneShow(_list[index].name);
+        }));
+      },
     );
   }
 

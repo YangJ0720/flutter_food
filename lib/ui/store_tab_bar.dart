@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food/model/store_info_model.dart';
 
 class StoreTabBar extends StatefulWidget {
-  final List<String> tabs;
+  final List<StoreInfoTabModel> tab;
 
-  StoreTabBar(this.tabs);
+  StoreTabBar(this.tab);
 
   @override
   State<StatefulWidget> createState() {
@@ -14,24 +15,25 @@ class StoreTabBar extends StatefulWidget {
 class StoreTabBarState extends State<StoreTabBar> {
   List<Widget> _createTabBar() {
     List<Tab> tabs = List();
-    List<String> list = widget.tabs;
-    list.forEach((i) => tabs.add(Tab(child: Text(i))));
+    List<StoreInfoTabModel> list = widget.tab;
+    list.forEach((i) => tabs.add(Tab(child: Text(i.name))));
     return tabs;
   }
 
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
-        delegate: _StoreTabBarSliver(
-          TabBar(
-            tabs: _createTabBar(),
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorWeight: 2.5,
-          ),
+      delegate: _StoreTabBarSliver(
+        TabBar(
+          tabs: _createTabBar(),
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey,
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorWeight: 2.5,
         ),
-        pinned: true);
+      ),
+      pinned: true,
+    );
   }
 }
 

@@ -1,26 +1,25 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:food/widget/wrap_cache_image.dart';
 
-class StoreSearchSliver extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return StoreSearchSliverState();
-  }
-}
+class StoreSearchSliver extends StatelessWidget {
+  final String imageUrl;
 
-class StoreSearchSliverState extends State<StoreSearchSliver> {
+  StoreSearchSliver({this.imageUrl});
+
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
-      delegate: _StoreSearchDelegate(),
-      pinned: true,
-    );
+        delegate: _StoreSearchDelegate(imageUrl), pinned: true);
   }
 }
 
 class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
+  final String imageUrl;
   var paddingTop = MediaQueryData.fromWindow(window).padding.top;
+
+  _StoreSearchDelegate(this.imageUrl);
 
   Color _makeStickyColorByIcon(double shrinkOffset) {
     if (shrinkOffset <= minExtent) {
@@ -93,8 +92,8 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
         child: Stack(
       children: <Widget>[
         Container(
-          child: Image.asset('images/aeg.jpg',
-              height: maxExtent, fit: BoxFit.cover),
+          child: WrapCacheImage(url: imageUrl, fit: BoxFit.cover),
+          height: maxExtent,
         ),
         Positioned(
             child: Container(
@@ -132,7 +131,7 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 200 + paddingTop;
+  double get maxExtent => 150 + paddingTop;
 
   @override
   double get minExtent => 50;

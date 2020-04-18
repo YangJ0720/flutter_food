@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food/model/find_model.dart';
-import 'package:food/widget/find_tab_view_waterfall.dart';
+import 'package:food/ui/find_tab_view_waterfall.dart';
 import 'package:food/widget/load_view.dart';
 
 /// 发现 -> TabBarView

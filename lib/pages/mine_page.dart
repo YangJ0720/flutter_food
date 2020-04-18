@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food/ui/system_settings.dart';
-import 'package:food/widget/mine_card.dart';
-import 'package:food/widget/mine_member_card.dart';
-import 'package:food/widget/mine_user_info.dart';
+import 'package:food/ui/mine_card.dart';
+import 'package:food/ui/mine_member_card.dart';
+import 'package:food/ui/mine_user_info.dart';
 
 /// 我的
 class MinePage extends StatefulWidget {

@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food/config/network_config.dart';
 import 'package:food/model/home_model.dart';
-import 'package:food/widget/home_banner.dart';
-import 'package:food/widget/home_discount.dart';
-import 'package:food/widget/home_discount_grid.dart';
-import 'package:food/widget/home_exclusive_grid.dart';
-import 'package:food/widget/home_grid_nav.dart';
-import 'package:food/widget/home_list_tile.dart';
-import 'package:food/widget/home_navigation.dart';
-import 'package:food/widget/home_search_sliver.dart';
-import 'package:food/widget/home_tab_bar.dart';
-import 'package:food/widget/home_tab_view.dart';
+import 'package:food/ui/home_banner.dart';
+import 'package:food/ui/home_discount.dart';
+import 'package:food/ui/home_discount_grid.dart';
+import 'package:food/ui/home_exclusive_grid.dart';
+import 'package:food/ui/home_grid_nav.dart';
+import 'package:food/ui/home_list_tile.dart';
+import 'package:food/ui/home_navigation.dart';
+import 'package:food/ui/home_search_sliver.dart';
+import 'package:food/ui/home_tab_bar.dart';
+import 'package:food/ui/home_tab_view.dart';
 import 'package:food/widget/load_view.dart';
 
 /// 首页
@@ -112,9 +112,7 @@ class HomeState extends State
                   HomeExclusiveGrid(list: _homeModel.exclusiveGrid),
 
                   /// 广告轮播图
-                  SliverToBoxAdapter(
-                    child: HomeBanner(banner: _homeModel.ad),
-                  ),
+                  SliverToBoxAdapter(child: HomeBanner(banner: _homeModel.ad)),
 
                   /// 选项卡
                   HomeTabBar(
