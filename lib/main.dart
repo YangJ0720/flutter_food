@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/home.dart';
+import 'package:food/ui/store_info.dart';
 import 'package:food/ui/system_settings.dart';
 import 'package:food/ui/user_info.dart';
 
@@ -15,7 +18,7 @@ class App extends StatefulWidget {
 
 class AppState extends State {
   /// 当前是否为Flutter开发
-  final bool isDev = true;
+  final bool isDev = false;
 
   void _onRoutePushed(
       String pageName, String uniqueId, Map params, Route route, Future _) {}

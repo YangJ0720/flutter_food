@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/ui/user_info.dart';
 
 class MineUserInfo extends StatefulWidget {
@@ -10,7 +11,6 @@ class MineUserInfo extends StatefulWidget {
 }
 
 class MineUserInfoState extends State<MineUserInfo> {
-
   String _path = 'images/a4j.png';
 
   @override
@@ -27,7 +27,7 @@ class MineUserInfoState extends State<MineUserInfo> {
                     Text(
                       '立即登录',
                       style:
-                      TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                     ),
                     Icon(Icons.chevron_right),
                   ]),
@@ -40,17 +40,13 @@ class MineUserInfoState extends State<MineUserInfo> {
               width: 120,
               height: 120,
               padding: EdgeInsets.all(20),
-              child: ClipOval(
-                child: Image.asset(_path),
-              ),
+              child: ClipOval(child: Image.asset(_path)),
             ),
           ],
         ),
       ),
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return UserInfo(_path);
-        }));
+        FlutterBoost.singleton.open('sample://user_info').then((Map value) {});
       },
     );
   }

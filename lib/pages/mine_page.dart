@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/ui/system_settings.dart';
 import 'package:food/ui/mine_card.dart';
 import 'package:food/ui/mine_member_card.dart';
@@ -31,9 +32,7 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
         IconButton(
           icon: Icon(Icons.settings, color: Colors.grey),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return SystemSettings();
-            }));
+            FlutterBoost.singleton.open('sample://system_settings').then((Map value) {});
           },
         ),
         IconButton(icon: Icon(Icons.sms)),
