@@ -4,7 +4,7 @@ import "package:flutter/material.dart";
 class UserInfo extends StatefulWidget {
   final String path;
 
-  UserInfo(this.path);
+  UserInfo({this.path});
 
   @override
   State<StatefulWidget> createState() {
@@ -75,7 +75,10 @@ class UserInfoState extends State<UserInfo> {
                   Container(
                     width: 40,
                     height: 40,
-                    child: ClipOval(child: Image.asset(widget.path)),
+                    child: ClipOval(
+                        child: Image.asset(widget.path == null
+                            ? 'images/a4j.png'
+                            : widget.path)),
                   ),
                   Icon(Icons.keyboard_arrow_right)
                 ],

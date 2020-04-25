@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boost/flutter_boost.dart';
-import 'package:food/ui/system_settings.dart';
 import 'package:food/ui/mine_card.dart';
 import 'package:food/ui/mine_member_card.dart';
 import 'package:food/ui/mine_user_info.dart';
+import 'package:food/ui/system_settings.dart';
+import 'package:food/utils/route_utils.dart';
 
 /// 我的
 class MinePage extends StatefulWidget {
@@ -32,10 +32,14 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
         IconButton(
           icon: Icon(Icons.settings, color: Colors.grey),
           onPressed: () {
-            FlutterBoost.singleton.open('sample://system_settings').then((Map value) {});
+            var url = 'sample://system_settings';
+            RouteUtils.launch(context, SystemSettings(), url);
           },
         ),
-        IconButton(icon: Icon(Icons.sms)),
+        IconButton(
+          icon: Icon(Icons.sms, color: Colors.grey),
+          onPressed: () {},
+        ),
       ],
     );
     _appBarHeight = appBar.preferredSize.height;
@@ -45,8 +49,11 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
   Widget _createItem(String path, String text) {
     return Container(
       decoration: BoxDecoration(
-        border:
-            Border(bottom: BorderSide(width: 0.1, color: Color(0xFF999999))),
+        border: Border(
+            bottom: BorderSide(
+          width: 0.1,
+          color: Color(0xFF999999),
+        )),
       ),
       child: Padding(
         padding: EdgeInsets.all(15),
@@ -97,7 +104,6 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
             MineUserInfo(),
             MineMemberCard(),
             Row(
-              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 MineCard('红包卡券', '12', '个未使用'),
                 MineCard('津贴', '¥20', '可用'),

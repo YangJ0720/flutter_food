@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/model/home_grid_nav_model.dart';
 import 'package:food/ui/undone_show.dart';
+import 'package:food/utils/route_utils.dart';
 
 /// 首页 -> 网格导航
 class HomeGridNav extends StatefulWidget {
@@ -29,11 +30,7 @@ class HomeGridNavState extends State<HomeGridNav> {
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         ),
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return UndoneShow(i.label);
-          }));
-        },
+        onTap: () => RouteUtils.launchUndone(context, i.label),
       ));
     });
     return list;

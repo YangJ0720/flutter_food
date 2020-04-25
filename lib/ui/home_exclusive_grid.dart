@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/model/home_exclusive_grid_model.dart';
 import 'package:food/ui/undone_show.dart';
+import 'package:food/utils/route_utils.dart';
 import 'package:food/widget/wrap_cache_image.dart';
 
 class HomeExclusiveGrid extends StatelessWidget {
@@ -9,11 +10,6 @@ class HomeExclusiveGrid extends StatelessWidget {
   final List<HomeExclusiveGridModel> list;
 
   const HomeExclusiveGrid({Key key, this.title, this.list}) : super(key: key);
-
-  void _onClick(BuildContext context, String label) {
-    PageRoute route = MaterialPageRoute(builder: (_) => UndoneShow(label));
-    Navigator.push(context, route);
-  }
 
   Widget _createItem(BuildContext context, HomeExclusiveGridModel model,
       EdgeInsets margin, TextStyle style) {
@@ -43,8 +39,8 @@ class HomeExclusiveGrid extends StatelessWidget {
                       )
                     ],
                   ),
-                  decoration:
-                      BoxDecoration(color: Color.fromARGB(245, 238, 238, 238),
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(245, 238, 238, 238),
                       borderRadius: borderRadius),
                   padding: EdgeInsets.only(left: 10, top: 5, bottom: 5),
                 ),
@@ -56,7 +52,7 @@ class HomeExclusiveGrid extends StatelessWidget {
         ),
         margin: margin,
       ),
-      onTap: () => {_onClick(context, model.label)},
+      onTap: () => RouteUtils.launchUndone(context, model.label),
     );
   }
 

@@ -2,10 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:food/config/network_config.dart';
+import 'package:food/model/store_info_shopping_model.dart';
 import 'package:food/ui/undone_show.dart';
+import 'package:food/widget/expand_number.dart';
 import 'package:food/widget/shopping_cart.dart';
 import 'package:food/widget/wrap_cache_image.dart';
 
+/// 商家详情 -> 点餐 -> 商品详情
 class StoreTabViewOrderDetails extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -234,7 +237,7 @@ class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
                       '¥42.8',
                       style: TextStyle(color: Colors.red, fontSize: 18),
                     ),
-                    Image.asset('images/a2i.png', width: 20, height: 20)
+                    ExpandNumber(model: StoreInfoGeneric(42.8))
                   ],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),

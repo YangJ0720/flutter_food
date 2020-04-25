@@ -35,9 +35,7 @@ class StoreInfoState extends State<StoreInfo> {
     if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
       Map<String, dynamic> map = json.decode(response.data)['data'];
       var model = StoreInfoModel.fromJson(map);
-      setState(() {
-        _storeInfoModel = model;
-      });
+      setState(() => {_storeInfoModel = model});
     }
   }
 

@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 /// 商铺详情 -> 点餐选项卡
 class StoreInfoShoppingModel {
   final List<StoreInfoBannerModel> banner;
@@ -59,14 +57,14 @@ class StoreInfoRecommendModel {
   }
 }
 
-class StoreInfoRecommendSubModel {
+class StoreInfoRecommendSubModel extends StoreInfoGeneric {
   final String imageUrl;
   final String name;
   final String shipments;
-  final double price;
 
   StoreInfoRecommendSubModel(
-      this.imageUrl, this.name, this.shipments, this.price);
+      this.imageUrl, this.name, this.shipments, double price)
+      : super(price);
 
   factory StoreInfoRecommendSubModel.fromJson(Map<String, dynamic> map) {
     var imageUrl = map['imageUrl'];
@@ -92,16 +90,16 @@ class StoreInfoSidebarModel {
 }
 
 /// 商铺详情 -> 点餐选项卡 -> 商品列表
-class StoreInfoListModel {
+class StoreInfoListModel extends StoreInfoGeneric {
   final String imageUrl;
   final String name;
   final String summary;
   final String shipments;
-  final double price;
   final int type;
 
   StoreInfoListModel(this.imageUrl, this.name, this.summary, this.shipments,
-      this.price, this.type);
+      double price, this.type)
+      : super(price);
 
   factory StoreInfoListModel.fromJson(Map<String, dynamic> map) {
     var imageUrl = map['imageUrl'];
@@ -112,4 +110,19 @@ class StoreInfoListModel {
     var type = map['type'];
     return StoreInfoListModel(imageUrl, name, summary, shipments, price, type);
   }
+
+  void setNumber(int number) {
+    this.number = number;
+  }
+}
+
+///
+class StoreInfoGeneric {
+  /// 商品价格
+  final double price;
+
+  /// 订单数量
+  int number = 0;
+
+  StoreInfoGeneric(this.price);
 }

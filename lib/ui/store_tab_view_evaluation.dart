@@ -8,7 +8,8 @@ class StoreTabViewEvaluation extends StatefulWidget {
   }
 }
 
-class StoreTabViewEvaluationState extends State<StoreTabViewEvaluation> {
+class StoreTabViewEvaluationState extends State<StoreTabViewEvaluation>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,4 +18,7 @@ class StoreTabViewEvaluationState extends State<StoreTabViewEvaluation> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

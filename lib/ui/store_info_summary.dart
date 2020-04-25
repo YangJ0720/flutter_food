@@ -65,7 +65,7 @@ class StoreInfoSummaryState extends State<StoreInfoSummary> {
               padding: EdgeInsets.all(10),
               child: Text('月售${widget.model.sales}', style: style),
             ),
-            Text('蜂鸟${widget.model.professional_delivery ? '专' : '快'}送',
+            Text('蜂鸟${widget.model.professionalDelivery ? '专' : '快'}送',
                 style: style)
           ],
         ),

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/model/home_discount_grid_model.dart';
 import 'package:food/ui/undone_show.dart';
+import 'package:food/utils/route_utils.dart';
 import 'package:food/widget/wrap_cache_image.dart';
 
 class HomeDiscountGrid extends StatelessWidget {
@@ -59,11 +60,7 @@ class HomeDiscountGrid extends StatelessWidget {
         ),
         margin: margin,
       ),
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return UndoneShow(model.label);
-        }));
-      },
+      onTap: () => RouteUtils.launchUndone(context, model.label),
     );
   }
 

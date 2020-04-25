@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/ui/user_info.dart';
+import 'package:food/utils/route_utils.dart';
 
 class MineUserInfo extends StatefulWidget {
   @override
@@ -46,7 +47,8 @@ class MineUserInfoState extends State<MineUserInfo> {
         ),
       ),
       onTap: () {
-        FlutterBoost.singleton.open('sample://user_info').then((Map value) {});
+        var url = 'sample://user_info';
+        RouteUtils.launch(context, UserInfo(path: _path), url);
       },
     );
   }

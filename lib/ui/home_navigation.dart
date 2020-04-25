@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food/browser/simple_browser.dart';
 import 'package:food/model/home_navigation_model.dart';
+import 'package:food/utils/route_utils.dart';
 
 /// 首页 -> 快捷导航
 class HomeNavigation extends StatelessWidget {
@@ -27,14 +28,7 @@ class HomeNavigation extends StatelessWidget {
           Text(model.label, style: style),
         ],
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) {
-            return SimpleBrowser(model.label, model.url);
-          }),
-        );
-      },
+      onTap: () => RouteUtils.launchWeb(context, model.label, model.url),
     );
   }
 

@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/model/home_tab_model.dart';
 import 'package:food/model/home_tab_view_model.dart';
 import 'package:food/ui/store_info.dart';
+import 'package:food/utils/route_utils.dart';
 
 class HomeTabViewList extends StatefulWidget {
   final HomeTabModel model;
@@ -28,9 +30,7 @@ class HomeTabViewListState extends State<HomeTabViewList> {
       List<dynamic> data = map['data'];
       List<HomeTabViewModel> list =
           data.map((i) => HomeTabViewModel.fromJson(i)).toList();
-      setState(() {
-        _list.addAll(list);
-      });
+      setState(() => {_list.addAll(list)});
     });
   }
 
@@ -85,23 +85,23 @@ class HomeTabViewListState extends State<HomeTabViewList> {
                   Expanded(
                     child: _createText('月售${model.sales}'),
                   ),
-                  model.professional_delivery
+                  model.professionalDelivery
                       ? Image.asset('images/afh.png', width: 50, height: 12)
                       : Container()
                 ],
               ),
               Row(
                 children: <Widget>[
-                  _createText('起送¥${model.starting_price}'),
+                  _createText('起送¥${model.startingPrice}'),
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.only(left: 5),
-                      child: _createText('配送¥${model.delivery_fee}'),
+                      child: _createText('配送¥${model.deliveryFee}'),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(right: 5),
-                    child: _createText(model.arrival_time),
+                    child: _createText(model.arrivalTime),
                   ),
                   _createText(model.distance)
                 ],
@@ -124,11 +124,10 @@ class HomeTabViewListState extends State<HomeTabViewList> {
         margin: EdgeInsets.only(left: 10, right: 10),
       ),
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) {
-            return StoreInfo(model);
-          }),
-        );
+        var url = 'sample://store_info';
+        var map = Map<String, dynamic>();
+        map['HomeTabViewModel'] = jsonEncode(model);
+        RouteUtils.launch(context, StoreInfo(model), url, urlParams: map);
       },
     );
   }

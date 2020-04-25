@@ -8,7 +8,8 @@ class StoreTabViewBrand extends StatefulWidget {
   }
 }
 
-class StoreTabViewBrandState extends State<StoreTabViewBrand> {
+class StoreTabViewBrandState extends State<StoreTabViewBrand>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,4 +18,7 @@ class StoreTabViewBrandState extends State<StoreTabViewBrand> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
