@@ -16,8 +16,7 @@ class ProductCard extends StatefulWidget {
   }
 }
 
-class ProductCardState extends State<ProductCard>
-    with AutomaticKeepAliveClientMixin {
+class ProductCardState extends State<ProductCard> {
   /// 跳转商品详情界面
   void _onRouteProductPage() {
     var url = 'sample://product_info';
@@ -30,8 +29,8 @@ class ProductCardState extends State<ProductCard>
         child: Column(
           children: <Widget>[
             ClipRRect(
-              child: WrapCacheImage(
-                url: model.imageUrl,
+              child: Container(
+                child: WrapCacheImage(url: model.imageUrl),
                 width: 150,
                 height: 150,
               ),
@@ -93,7 +92,4 @@ class ProductCardState extends State<ProductCard>
       scrollDirection: Axis.horizontal,
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

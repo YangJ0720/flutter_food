@@ -53,7 +53,7 @@ class AppState extends State {
     return MaterialApp(
       title: 'Flutter Hybrid',
       builder: FlutterBoost.init(postPush: _onRoutePushed),
-      home: BuildConfig.isDev ? Home() : Container(color: Colors.white),
+      home: BuildConfig.isDev ? Home() : Container(),
     );
   }
 }

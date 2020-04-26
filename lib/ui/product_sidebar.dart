@@ -26,7 +26,7 @@ class ProductSidebarState extends State<ProductSidebar> {
         child: Container(
           alignment: Alignment.centerLeft,
           child: _createSidebarText(k, v),
-          color: k == _selectorIndex ? Colors.white : Colors.transparent,
+          color: k == _selectorIndex ? Color(0xFFF8F8F8) : Colors.white,
           height: 50,
           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
         ),
@@ -59,8 +59,9 @@ class ProductSidebarState extends State<ProductSidebar> {
       children: <Widget>[
         Container(
           child: WrapCacheImage(url: model.imageUrl, isPlaceholder: false),
-          width: 10,
-          height: 10,
+          width: 15,
+          height: 15,
+          margin: EdgeInsets.only(right: 2.5),
         ),
         Text(model.name,
             maxLines: 2,

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food/widget/wrap_cache_image.dart';
 
 class StoreSearchSliver extends StatelessWidget {
@@ -16,10 +17,28 @@ class StoreSearchSliver extends StatelessWidget {
 }
 
 class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
+  static const double MIN_EXTENT = 50;
   final String imageUrl;
+  String statusBarMode = 'light';
   var paddingTop = MediaQueryData.fromWindow(window).padding.top;
 
   _StoreSearchDelegate(this.imageUrl);
+
+  void _updateStatusBarBrightness(shrinkOffset) {
+    if (shrinkOffset > MIN_EXTENT && this.statusBarMode == 'dark') {
+      this.statusBarMode = 'light';
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+      ));
+    } else if (shrinkOffset <= MIN_EXTENT && this.statusBarMode == 'light') {
+      this.statusBarMode = 'dark';
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light,
+      ));
+    }
+  }
 
   Color _makeStickyColorByIcon(double shrinkOffset) {
     if (shrinkOffset <= minExtent) {
@@ -46,54 +65,64 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
   }
 
   Widget _makeStickySearchWidget(double shrinkOffset) {
-    return Expanded(
-      child: shrinkOffset <= minExtent
-          ? Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: Image.asset('images/am2.png', width: 20, height: 20),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: Image.asset('images/am3.png', width: 20, height: 20),
-                )
-              ],
-            )
-          : Container(
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-              child: FlatButton(
-                onPressed: () => {print('click')},
-                color: Color(0xFFF0F0F0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 5, right: 5),
-                      child:
-                          Image.asset('images/ahh.png', width: 15, height: 15),
-                    ),
-                    Text('想吃什么搜一搜', style: TextStyle(color: Colors.grey))
-                  ],
-                ),
-                shape: StadiumBorder(
-                    side: BorderSide(color: Color(0xFFE0E0E0), width: 0.5)),
-              ),
+    if (shrinkOffset <= minExtent) {
+      return Expanded(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Image.asset('images/am2.png', width: 20, height: 20),
             ),
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Image.asset('images/am3.png', width: 20, height: 20),
+            )
+          ],
+        ),
+      );
+    }
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(left: 10, right: 10),
+        child: FlatButton(
+          onPressed: () {},
+          color: Color(0xFFF0F0F0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                child: Image.asset('images/ahh.png', width: 15, height: 15),
+              ),
+              Text('想吃什么搜一搜', style: TextStyle(color: Colors.grey))
+            ],
+          ),
+          shape: StadiumBorder(
+              side: BorderSide(color: Color(0xFFE0E0E0), width: 0.5)),
+        ),
+      ),
     );
   }
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SafeArea(
-        child: Stack(
+    _updateStatusBarBrightness(shrinkOffset);
+    return Stack(
       children: <Widget>[
         Container(
           child: WrapCacheImage(url: imageUrl, fit: BoxFit.cover),
           height: maxExtent,
+        ),
+        Positioned(
+          child: Container(
+            color: _makeStickyColorByBg(shrinkOffset),
+            height: paddingTop,
+          ),
+          top: 0,
+          left: 0,
+          right: 0,
         ),
         Positioned(
             child: Container(
@@ -120,21 +149,21 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
                 ],
               ),
               color: _makeStickyColorByBg(shrinkOffset),
-              height: minExtent,
+              height: MIN_EXTENT,
             ),
-            top: 0,
+            top: paddingTop,
             left: 0,
             right: 0)
       ],
       fit: StackFit.expand,
-    ));
+    );
   }
 
   @override
-  double get maxExtent => 150 + paddingTop;
+  double get maxExtent => 150;
 
   @override
-  double get minExtent => 50;
+  double get minExtent => MIN_EXTENT + paddingTop;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {

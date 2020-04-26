@@ -39,6 +39,32 @@ class StoreInfoState extends State<StoreInfo> {
     }
   }
 
+  Widget _createView() {
+    if (_storeInfoModel == null) {
+      return LoadView();
+    }
+    return NotificationListener(
+      child: DefaultTabController(
+        length: _storeInfoModel.tab.length,
+        child: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            StoreSearchSliver(imageUrl: _storeInfoModel.background),
+            SliverToBoxAdapter(
+                child: StoreInfoSummary(widget.model, _storeInfoModel)),
+            StoreTabBar(_storeInfoModel.tab)
+          ],
+          body: TabBarView(
+            children: [
+              StoreTabViewOrder(),
+              StoreTabViewEvaluation(),
+              StoreTabViewBrand()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void initState() {
     _onRequest();
@@ -47,33 +73,6 @@ class StoreInfoState extends State<StoreInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: _storeInfoModel == null
-          ? LoadView()
-          : SafeArea(
-              child: NotificationListener(
-                child: DefaultTabController(
-                  length: _storeInfoModel.tab.length,
-                  child: NestedScrollView(
-                    headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                      StoreSearchSliver(imageUrl: _storeInfoModel.background),
-                      SliverToBoxAdapter(
-                          child:
-                              StoreInfoSummary(widget.model, _storeInfoModel)),
-                      StoreTabBar(_storeInfoModel.tab)
-                    ],
-                    body: TabBarView(
-                      children: [
-                        StoreTabViewOrder(),
-                        StoreTabViewEvaluation(),
-                        StoreTabViewBrand()
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-    );
+    return Scaffold(backgroundColor: Colors.white, body: _createView());
   }
 }

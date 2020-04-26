@@ -45,7 +45,6 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
         Expanded(
           child: Container(
             child: ProductListView(_storeInfoShoppingModel.list),
-            color: Colors.white,
           ),
         )
       ],
@@ -87,12 +86,13 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
               _storeInfoShoppingModel.banner == null
                   ? Container()
                   : SimpleBannerView(),
-              Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    _storeInfoShoppingModel.recommend.title,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  )),
+              Container(
+                child: Text(
+                  _storeInfoShoppingModel.recommend.title,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                padding: EdgeInsets.all(10),
+              ),
               Container(
                 child: ProductCard(_storeInfoShoppingModel.recommend.list),
                 height: 230,
@@ -103,7 +103,7 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
           ShoppingCart(price: _price)
         ],
       ),
-      color: Color(0xFFF8F8F8),
+      color: Colors.white,
     );
   }
 

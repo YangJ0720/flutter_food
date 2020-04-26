@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food/model/home_tab_view_model.dart';
 import 'package:food/model/store_info_model.dart';
+import 'package:food/widget/expand_introduction.dart';
 
+/// 商铺信息 -> 商铺内容简介
 class StoreInfoSummary extends StatefulWidget {
   final HomeTabViewModel model;
   final StoreInfoModel _storeInfoModel;
@@ -78,15 +80,7 @@ class StoreInfoSummaryState extends State<StoreInfoSummary> {
                 'images/alr.png', Colors.white)
           ],
         ),
-        Padding(
-          padding: EdgeInsets.all(5),
-          child: Text(
-            widget._storeInfoModel.announcement,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.grey, fontSize: 12),
-          ),
-        )
+        ExpandIntroduction(text: widget._storeInfoModel.announcement)
       ]),
     );
   }

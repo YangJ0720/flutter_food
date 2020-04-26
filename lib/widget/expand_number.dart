@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:food/event/global_event.dart';
 import 'package:food/model/store_info_shopping_model.dart';
 
-/// 点餐份量自定义控件
+/// 商铺信息 -> 点餐份量自定义控件
 class ExpandNumber<T extends StoreInfoGeneric> extends StatefulWidget {
   final T model;
 

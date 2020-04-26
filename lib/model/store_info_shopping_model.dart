@@ -10,10 +10,11 @@ class StoreInfoShoppingModel {
   factory StoreInfoShoppingModel.fromJson(Map<String, dynamic> json) {
     /// 商铺详情界面 -> 点餐选项卡 -> 广告轮播
     List<dynamic> bannerJson = json['banner'];
+    print('bannerJson = $bannerJson}');
     var banner =
         bannerJson.map((i) => StoreInfoBannerModel.fromJson(i)).toList();
 
-    /// 商铺详情界面 -> 点餐选项卡 ->
+    /// 商铺详情界面 -> 点餐选项卡 -> 商家推荐
     var recommendJson = json['recommend'];
     var recommend = StoreInfoRecommendModel.fromJson(recommendJson);
 
