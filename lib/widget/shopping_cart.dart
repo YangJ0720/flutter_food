@@ -16,17 +16,15 @@ class ShoppingCart extends StatefulWidget {
 class ShoppingCartState extends State<ShoppingCart> {
   Widget _convertTextByPrice() {
     if (widget.price == null || widget.price == 0) {
-      return Text('未选购商品',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-          ));
+      return Text(
+        '未选购商品',
+        style: TextStyle(color: Colors.white, fontSize: 14),
+      );
     }
-    return Text('¥${widget.price}',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-        ));
+    return Text(
+      '¥${widget.price}',
+      style: TextStyle(color: Colors.white, fontSize: 18),
+    );
   }
 
   Widget _convertPayTextByPrice(double price) {
@@ -36,7 +34,10 @@ class ShoppingCartState extends State<ShoppingCart> {
         child: Text(
           '¥20起送',
           style: TextStyle(
-              color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 16),
+            color: Colors.grey,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
         ),
         color: Colors.black38,
         height: 50,
@@ -48,7 +49,10 @@ class ShoppingCartState extends State<ShoppingCart> {
       child: Text(
         '去结算',
         style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
       ),
       color: Color(0xFF7ACE81),
       height: 50,
@@ -77,7 +81,8 @@ class ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
           GestureDetector(
-            onTap: () => {RouteUtils.launch(context, null, 'sample://nativePage')},
+            onTap: () =>
+                {RouteUtils.launch(context, null, 'sample://transport_map')},
             child: _convertPayTextByPrice(widget.price),
           )
         ],

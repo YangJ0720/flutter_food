@@ -29,6 +29,8 @@ class HomeTabViewState extends State<HomeTabView> {
   @override
   Widget build(BuildContext context) {
     return TabBarView(
-        children: _createTabView(), controller: widget.tabController);
+      children: _createTabView(),
+      controller: widget.tabController,
+    );
   }
 }

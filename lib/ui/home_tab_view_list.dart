@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_boost/flutter_boost.dart';
+import 'package:food/config/network_config.dart';
 import 'package:food/model/home_tab_model.dart';
 import 'package:food/model/home_tab_view_model.dart';
 import 'package:food/ui/store_info.dart';
@@ -20,18 +22,21 @@ class HomeTabViewList extends StatefulWidget {
   }
 }
 
-class HomeTabViewListState extends State<HomeTabViewList> {
+class HomeTabViewListState extends State<HomeTabViewList>
+    with AutomaticKeepAliveClientMixin {
   List<HomeTabViewModel> _list = List();
 
-  void _onRequest() {
+  void _onRequest() async {
     var id = widget.model.id;
-    rootBundle.loadString('assets/home/$id/tab.json').then((value) {
-      Map<String, dynamic> map = json.decode(value);
+    var url = '${NetworkConfig.HOST_URL}assets/home/tab/$id/tab.json';
+    Response response = await Dio().get(url);
+    if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
+      Map<String, dynamic> map = json.decode(response.data);
       List<dynamic> data = map['data'];
       List<HomeTabViewModel> list =
           data.map((i) => HomeTabViewModel.fromJson(i)).toList();
       setState(() => {_list.addAll(list)});
-    });
+    }
   }
 
   Widget _createText(String text) {
@@ -172,4 +177,7 @@ class HomeTabViewListState extends State<HomeTabViewList> {
       itemCount: _list.length,
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -64,15 +64,12 @@ flutter:
 
   assets:
     - images/
-    - assets/
-    - assets/home/1/
-    - assets/home/2/
-    - assets/home/3/
     - assets/find/1/
     - assets/find/2/
     - assets/find/3/
     - assets/find/4/
     - assets/find/5/
+    - assets/order/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -40,7 +40,7 @@ class HomeState extends State
   String _address = '';
 
   void _onRequest() async {
-    var url = '${NetworkConfig.HOST_URL}assets/home.json';
+    var url = '${NetworkConfig.HOST_URL}assets/home/home.json';
     Response response = await Dio().get(url);
     if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
       Map<String, dynamic> data = json.decode(response.data)['data'];
@@ -70,6 +70,7 @@ class HomeState extends State
 
   @override
   void dispose() {
+    _tabController.dispose();
     _methodChannel.setMethodCallHandler(null);
     super.dispose();
   }

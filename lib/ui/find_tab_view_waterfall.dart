@@ -6,6 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food/model/find_model.dart';
 import 'package:food/model/find_waterfall_model.dart';
 import 'package:food/ui/undone_show.dart';
+import 'package:food/utils/route_utils.dart';
 
 /// 发现 -> 瀑布流布局
 class FindTabViewWaterfall extends StatefulWidget {
@@ -58,7 +59,9 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
               ConstrainedBox(
                 constraints: BoxConstraints.expand(),
                 child: CachedNetworkImage(
-                    imageUrl: _list[index].background, fit: BoxFit.cover),
+                  imageUrl: _list[index].background,
+                  fit: BoxFit.cover,
+                ),
               ),
               Container(
                 decoration: BoxDecoration(color: Color(0xE6F5F5F5)),
@@ -86,11 +89,7 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
           ),
         ),
       ),
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) {
-          return UndoneShow(_list[index].name);
-        }));
-      },
+      onTap: () => RouteUtils.launchUndone(context, _list[index].name),
     );
   }
 
@@ -105,7 +104,6 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
     return RefreshIndicator(
       onRefresh: _onRefresh,
       child: StaggeredGridView.countBuilder(
-          controller: ScrollController(),
           itemCount: _list.length,
           crossAxisCount: 4,
           mainAxisSpacing: 5,

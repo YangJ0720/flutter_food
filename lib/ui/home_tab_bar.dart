@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food/model/home_tab_model.dart';
-import 'package:food/widget/load_view.dart';
 
 import 'home_view_pager_sliver.dart';
 

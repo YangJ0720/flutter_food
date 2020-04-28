@@ -47,27 +47,28 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
   }
 
   Widget _createItem(String path, String text) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-            bottom: BorderSide(
-          width: 0.1,
-          color: Color(0xFF999999),
-        )),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(15),
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: Image.asset(path, width: 25, height: 25),
-            ),
-            Expanded(child: Text(text)),
-            Icon(Icons.chevron_right, color: Colors.grey)
-          ],
+    return GestureDetector(
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 0.1, color: Color(0xFF999999)),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Image.asset(path, width: 25, height: 25),
+              ),
+              Expanded(child: Text(text)),
+              Icon(Icons.chevron_right, color: Colors.grey)
+            ],
+          ),
         ),
       ),
+      onTap: () => RouteUtils.launchUndone(context, text),
     );
   }
 

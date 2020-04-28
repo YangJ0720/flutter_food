@@ -13,9 +13,20 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  int _currentIndex = 0;
   final List<Widget> _list = [HomePage(), FindPage(), OrderPage(), MinePage()];
   final PageController _pageController = PageController();
+  int _currentIndex = 0;
+
+  void jumpToPage(int index) {
+    _pageController.jumpToPage(index);
+    setState(() => _currentIndex = index);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,33 +48,18 @@ class HomeState extends State<Home> {
         selectedFontSize: 12,
         unselectedFontSize: 12,
         items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              title: Text('首页')),
+            icon: Icon(Icons.remove_red_eye),
+            title: Text('发现'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.remove_red_eye,
-              ),
-              title: Text('发现')),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.assignment,
-              ),
-              title: Text('订单')),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-              ),
-              title: Text('我的')),
+            icon: Icon(Icons.assignment),
+            title: Text('订单'),
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('我的')),
         ],
-        onTap: (index) {
-          _pageController.jumpToPage(index);
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        onTap: (index) => jumpToPage(index),
       ),
     );
   }

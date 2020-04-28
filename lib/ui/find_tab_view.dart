@@ -18,9 +18,6 @@ class FindTabView extends StatefulWidget {
 
 class FindTabViewState extends State<FindTabView> {
   List<Widget> _create() {
-    if (widget._list == null) {
-      return [];
-    }
     List<Widget> list = List<Widget>();
     widget._list.forEach((i) => {list.add(_createContentView(i))});
     return list;
@@ -32,14 +29,12 @@ class FindTabViewState extends State<FindTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return widget._list.isEmpty
-        ? LoadView()
-        : Container(
-            margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-            child: TabBarView(
-              children: _create(),
-              controller: widget._tabController,
-            ),
-          );
+    if (widget._list.isEmpty) {
+      return LoadView();
+    }
+    return Container(
+      margin: EdgeInsets.only(left: 5, right: 5),
+      child: TabBarView(children: _create(), controller: widget._tabController),
+    );
   }
 }
