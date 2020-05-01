@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 
 /// 个人资料
 class UserInfo extends StatefulWidget {
@@ -13,6 +16,9 @@ class UserInfo extends StatefulWidget {
 }
 
 class UserInfoState extends State<UserInfo> {
+  String _avatarPath;
+  MethodChannel _methodChannel;
+
   Widget _createLabelByBind(String value, bool isBind) {
     return Text(
       isBind ? (value ?? '已绑定') : '未绑定',
@@ -25,7 +31,8 @@ class UserInfoState extends State<UserInfo> {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.grey, width: 0.1))),
+        border: Border(bottom: BorderSide(color: Colors.grey, width: 0.1)),
+      ),
       child: Row(
         children: <Widget>[
           Container(
@@ -36,12 +43,45 @@ class UserInfoState extends State<UserInfo> {
           ),
           Expanded(child: Text(label)),
           Container(
-              height: 40,
-              child: Center(child: _createLabelByBind(value, isBind))),
+            height: 40,
+            child: Center(child: _createLabelByBind(value, isBind)),
+          ),
           Icon(Icons.keyboard_arrow_right)
         ],
       ),
     );
+  }
+
+  Widget _createAvatar() {
+    Widget image;
+    if (_avatarPath == null) {
+      image = Image.asset(widget.path == null ? 'images/a4j.png' : widget.path);
+    } else {
+      image = Image.file(File(_avatarPath));
+    }
+    return Container(width: 40, height: 40, child: ClipOval(child: image));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _methodChannel = MethodChannel('method_channel_user_info');
+    _methodChannel.setMethodCallHandler((MethodCall methodCall) {
+      return Future<String>(() {
+        var method = methodCall.method;
+        if ("setPhoto" == method) {
+          setState(() => _avatarPath = methodCall.arguments.toString());
+        }
+        return methodCall.method;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _methodChannel.setMethodCallHandler(null);
+    _methodChannel = null;
+    super.dispose();
   }
 
   @override
@@ -63,23 +103,18 @@ class UserInfoState extends State<UserInfo> {
               padding: EdgeInsets.all(10),
               child: Text('基础信息', style: TextStyle(fontSize: 10))),
           GestureDetector(
-            onTap: () {},
+            onTap: () => _methodChannel.invokeMethod('getPhoto', [0]),
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: Colors.grey, width: 0.1))),
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey, width: 0.1),
+                ),
+              ),
               child: Row(
                 children: <Widget>[
                   Expanded(child: Text('头像')),
-                  Container(
-                    width: 40,
-                    height: 40,
-                    child: ClipOval(
-                        child: Image.asset(widget.path == null
-                            ? 'images/a4j.png'
-                            : widget.path)),
-                  ),
+                  _createAvatar(),
                   Icon(Icons.keyboard_arrow_right)
                 ],
               ),
@@ -88,8 +123,10 @@ class UserInfoState extends State<UserInfo> {
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                border:
-                    Border(bottom: BorderSide(color: Colors.grey, width: 0.1))),
+              border: Border(
+                bottom: BorderSide(color: Colors.grey, width: 0.1),
+              ),
+            ),
             child: Row(
               children: <Widget>[
                 Expanded(child: Text('用户名')),
@@ -101,8 +138,10 @@ class UserInfoState extends State<UserInfo> {
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                border:
-                    Border(bottom: BorderSide(color: Colors.grey, width: 0.1))),
+              border: Border(
+                bottom: BorderSide(color: Colors.grey, width: 0.1),
+              ),
+            ),
             child: Row(
               children: <Widget>[
                 Expanded(child: Text('收货地址')),
@@ -112,9 +151,10 @@ class UserInfoState extends State<UserInfo> {
             ),
           ),
           Container(
-              margin: EdgeInsets.only(top: 10),
-              padding: EdgeInsets.all(10),
-              child: Text('账号绑定', style: TextStyle(fontSize: 10))),
+            margin: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.all(10),
+            child: Text('账号绑定', style: TextStyle(fontSize: 10)),
+          ),
           _createItemByBind('images/a5i.png', '手机', true, '188****8888'),
           _createItemByBind('images/a5k.png', '淘宝', true),
           _createItemByBind('images/a5h.png', '支付宝', true),

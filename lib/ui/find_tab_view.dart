@@ -29,9 +29,6 @@ class FindTabViewState extends State<FindTabView> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget._list.isEmpty) {
-      return LoadView();
-    }
     return Container(
       margin: EdgeInsets.only(left: 5, right: 5),
       child: TabBarView(children: _create(), controller: widget._tabController),

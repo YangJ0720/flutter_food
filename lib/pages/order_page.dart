@@ -24,8 +24,6 @@ class OrderState extends State with AutomaticKeepAliveClientMixin {
   double _opacity = 0;
   List<OrderModel> _list;
 
-  void _changedJumpToPage(int index) {}
-
   void _changedOpacity(double opacity) {
     setState(() {
       _opacity = opacity;

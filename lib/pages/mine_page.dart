@@ -81,9 +81,7 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
     } else {
       return;
     }
-    setState(() {
-      _alpha = value;
-    });
+    setState(() => _alpha = value);
   }
 
   @override
