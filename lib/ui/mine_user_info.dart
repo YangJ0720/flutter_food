@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/ui/user_info.dart';
 import 'package:food/utils/route_utils.dart';
+import 'package:food/widget/circle_portrait.dart';
 
 class MineUserInfo extends StatefulWidget {
+  final String path;
+
+  const MineUserInfo({Key key, this.path}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return MineUserInfoState();
@@ -12,7 +17,17 @@ class MineUserInfo extends StatefulWidget {
 }
 
 class MineUserInfoState extends State<MineUserInfo> {
-  String _path = 'images/a4j.png';
+  String _path;
+
+  void changedPath(String path) {
+    _path = path;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _path = widget.path;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +53,17 @@ class MineUserInfoState extends State<MineUserInfo> {
               ),
             ),
             Container(
-              width: 120,
-              height: 120,
-              padding: EdgeInsets.all(20),
-              child: ClipOval(child: Image.asset(_path)),
+              child: CirclePortrait(path: _path, width: 100, height: 100),
+              margin: EdgeInsets.all(20),
             ),
           ],
         ),
       ),
       onTap: () {
         var url = 'sample://user_info';
-        RouteUtils.launch(context, UserInfo(path: _path), url);
+        Map<String, String> urlParams = Map();
+        urlParams['path'] = _path;
+        RouteUtils.launch(context, UserInfo(), url, urlParams: urlParams);
       },
     );
   }

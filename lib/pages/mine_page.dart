@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food/ui/mine_card.dart';
 import 'package:food/ui/mine_member_card.dart';
 import 'package:food/ui/mine_user_info.dart';
@@ -20,6 +21,14 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
 
   /// 标题栏高度
   double _appBarHeight = 0;
+
+  /// 用户头像文件缓存路径
+  String _path;
+
+  /// EventChannel
+  EventChannel _eventChannel;
+
+  final GlobalKey<MineUserInfoState> globalKey = GlobalKey();
 
   /// 创建AppBar
   AppBar _createAppBar() {
@@ -84,6 +93,24 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
     setState(() => _alpha = value);
   }
 
+  void _onData(Object data) {
+    setState(() {
+      _path = data.toString();
+      globalKey.currentState.changedPath(_path);
+    });
+  }
+
+  void _onError(Object error) {}
+
+  @override
+  void initState() {
+    super.initState();
+    _eventChannel = EventChannel('event_channel');
+    _eventChannel
+        .receiveBroadcastStream('flutter event channel')
+        .listen(_onData, onError: _onError, cancelOnError: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -100,7 +127,7 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
         },
         child: ListView(
           children: <Widget>[
-            MineUserInfo(),
+            MineUserInfo(key: globalKey, path: _path),
             MineMemberCard(),
             Row(
               children: <Widget>[

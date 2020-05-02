@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
+import 'package:food/widget/circle_portrait.dart';
 
 /// 个人资料
 class UserInfo extends StatefulWidget {
@@ -16,7 +15,7 @@ class UserInfo extends StatefulWidget {
 }
 
 class UserInfoState extends State<UserInfo> {
-  String _avatarPath;
+  String _path;
   MethodChannel _methodChannel;
 
   Widget _createLabelByBind(String value, bool isBind) {
@@ -52,25 +51,17 @@ class UserInfoState extends State<UserInfo> {
     );
   }
 
-  Widget _createAvatar() {
-    Widget image;
-    if (_avatarPath == null) {
-      image = Image.asset(widget.path == null ? 'images/a4j.png' : widget.path);
-    } else {
-      image = Image.file(File(_avatarPath));
-    }
-    return Container(width: 40, height: 40, child: ClipOval(child: image));
-  }
-
   @override
   void initState() {
     super.initState();
+    print('widget.path = ${widget.path}, _path = $_path');
+    _path = widget.path;
     _methodChannel = MethodChannel('method_channel_user_info');
     _methodChannel.setMethodCallHandler((MethodCall methodCall) {
       return Future<String>(() {
         var method = methodCall.method;
         if ("setPhoto" == method) {
-          setState(() => _avatarPath = methodCall.arguments.toString());
+          setState(() => _path = methodCall.arguments.toString());
         }
         return methodCall.method;
       });
@@ -114,7 +105,7 @@ class UserInfoState extends State<UserInfo> {
               child: Row(
                 children: <Widget>[
                   Expanded(child: Text('头像')),
-                  _createAvatar(),
+                  CirclePortrait(path: _path),
                   Icon(Icons.keyboard_arrow_right)
                 ],
               ),

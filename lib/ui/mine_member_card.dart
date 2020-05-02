@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/browser/simple_browser.dart';
+import 'package:food/utils/route_utils.dart';
 
 class MineMemberCard extends StatefulWidget {
   @override
@@ -16,9 +17,7 @@ class MineMemberCardState extends State<MineMemberCard> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return SimpleBrowser('超级会员', 'https://www.ele.me');
-              }));
+              RouteUtils.launchWeb(context, '超级会员', 'https://www.ele.me');
             },
             child: Container(
               decoration: BoxDecoration(
@@ -45,12 +44,8 @@ class MineMemberCardState extends State<MineMemberCard> {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return SimpleBrowser(
-                    '开通会员', 'https://open.shop.ele.me/openapi');
-              }));
-            },
+            onTap: () => RouteUtils.launchWeb(
+                context, '开通会员', 'https://open.shop.ele.me/openapi'),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(

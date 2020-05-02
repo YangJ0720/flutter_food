@@ -21,7 +21,6 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State {
-
   void _onRoutePushed(
       String pageName, String uniqueId, Map params, Route route, Future _) {}
 
@@ -36,7 +35,10 @@ class AppState extends State {
           print('pageName = $pageName, value = $value');
           return SystemSettings();
         },
-        'user_info': (pageName, param, _) => UserInfo(),
+        'user_info': (pageName, param, _) {
+          var path = param['path'];
+          return UserInfo(path: path);
+        },
         'store_info': (pageName, param, _) {
           var mapModel = jsonDecode(param['HomeTabViewModel']);
           var model = HomeTabViewModel.fromJson(mapModel);
