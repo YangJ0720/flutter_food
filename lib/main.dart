@@ -5,6 +5,7 @@ import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/config/build_config.dart';
 import 'package:food/home.dart';
 import 'package:food/model/home_tab_view_model.dart';
+import 'package:food/ui/search_info.dart';
 import 'package:food/ui/store_info.dart';
 import 'package:food/ui/store_tab_view_order_details.dart';
 import 'package:food/ui/system_settings.dart';
@@ -46,6 +47,7 @@ class AppState extends State {
         },
         'product_info': (pageName, param, _) => StoreTabViewOrderDetails(),
         'transport_map': (pageName, param, _) => TransportMap(),
+        'search_info': (pageName, param, _) => SearchInfo(),
       },
     );
   }

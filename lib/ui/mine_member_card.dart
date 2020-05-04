@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food/browser/simple_browser.dart';
 import 'package:food/utils/route_utils.dart';
 
-class MineMemberCard extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return MineMemberCardState();
-  }
-}
-
-class MineMemberCardState extends State<MineMemberCard> {
+class MineMemberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(

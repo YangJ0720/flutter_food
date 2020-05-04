@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:food/ui/search_info.dart';
+import 'package:food/utils/route_utils.dart';
 
 class HomeSearchSliver extends StatefulWidget {
   final String _address;
@@ -75,7 +77,10 @@ class HomeSearchDelegate extends SliverPersistentHeaderDelegate {
             margin: EdgeInsets.only(left: 10, right: 10),
             padding: EdgeInsets.only(top: 5, bottom: 5),
             child: FlatButton(
-              onPressed: () => {print('click')},
+              onPressed: () {
+                var url = 'sample://search_info';
+                RouteUtils.launch(context, SearchInfo(), url);
+              },
               color: Color(0xFFF0F0F0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +93,8 @@ class HomeSearchDelegate extends SliverPersistentHeaderDelegate {
                 ],
               ),
               shape: StadiumBorder(
-                  side: BorderSide(color: Color(0xFFE0E0E0), width: 0.5)),
+                side: BorderSide(color: Color(0xFFE0E0E0), width: 0.5),
+              ),
             ),
           )
         ],

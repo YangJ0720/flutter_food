@@ -53,7 +53,7 @@ class MineUserInfoState extends State<MineUserInfo> {
               ),
             ),
             Container(
-              child: CirclePortrait(path: _path, width: 100, height: 100),
+              child: CirclePortrait(path: _path, width: 80, height: 80),
               margin: EdgeInsets.all(20),
             ),
           ],

@@ -8,6 +8,8 @@ import 'package:food/ui/undone_show.dart';
 /// 路由跳转工具
 class RouteUtils {
   /// 根据编译模式切换不同跳转方式
+  /// var url = 'sample://user_info';
+  /// RouteUtils.launch(context, UserInfo(), url);
   static void launch(BuildContext context, Object object, String url,
       {Map<String, dynamic> urlParams, Map<dynamic, dynamic> exts}) {
     if (BuildConfig.isDev) {
