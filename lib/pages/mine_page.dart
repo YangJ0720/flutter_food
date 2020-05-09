@@ -72,7 +72,7 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
                 child: Image.asset(path, width: 25, height: 25),
               ),
               Expanded(child: Text(text)),
-              Icon(Icons.chevron_right, color: Colors.grey)
+              Image.asset('images/ble.png', width: 15, height: 15),
             ],
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/model/order_model.dart';
 import 'package:food/utils/route_utils.dart';
-import 'package:food/widget/order_empty.dart';
+import 'package:food/widget/order_empty_view.dart';
 import 'package:food/widget/wrap_cache_image.dart';
 
 class OrderList extends StatefulWidget {
@@ -153,7 +153,7 @@ class OrderListState extends State<OrderList> {
   @override
   Widget build(BuildContext context) {
     if (widget.list.isEmpty) {
-      return OrderEmpty();
+      return OrderEmptyView();
     }
     return RefreshIndicator(
       child: NotificationListener(

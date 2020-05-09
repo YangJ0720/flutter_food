@@ -54,7 +54,6 @@ class UserInfoState extends State<UserInfo> {
   @override
   void initState() {
     super.initState();
-    print('widget.path = ${widget.path}, _path = $_path');
     _path = widget.path;
     _methodChannel = MethodChannel('method_channel_user_info');
     _methodChannel.setMethodCallHandler((MethodCall methodCall) {

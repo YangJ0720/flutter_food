@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/ui/transport_map.dart';
 import 'package:food/utils/route_utils.dart';
 
 /// 点餐 -> 购物车
@@ -81,8 +82,10 @@ class ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
           GestureDetector(
-            onTap: () =>
-                {RouteUtils.launch(context, null, 'sample://transport_map')},
+            onTap: () {
+              var url = 'sample://transport_map';
+              RouteUtils.launch(context, TransportMap(), url);
+            },
             child: _convertPayTextByPrice(widget.price),
           )
         ],

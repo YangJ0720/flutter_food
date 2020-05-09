@@ -22,31 +22,57 @@ class StoreTabViewOrder extends StatefulWidget {
 class StoreTabViewOrderState extends State<StoreTabViewOrder>
     with AutomaticKeepAliveClientMixin {
   double _price = 0;
-  StoreInfoShoppingModel _storeInfoShoppingModel;
+  var _futureBuilderFuture;
 
   /// 请求点餐列表数据
-  void _onRequest() async {
+  Future<StoreInfoShoppingModel> _loadData() async {
     var url = '${NetworkConfig.HOST_URL}assets/store/tab/tab_shopping.json';
     Response response = await Dio().get(url);
     if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
       Map<String, dynamic> map = json.decode(response.data)['data'];
       var model = StoreInfoShoppingModel.fromJson(map);
-      setState(() => {_storeInfoShoppingModel = model});
+      return model;
     }
+    return null;
   }
 
-  Widget _createListView() {
+  Widget _createContentView(StoreInfoShoppingModel model) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Expanded(
+              child: ListView(
+            children: <Widget>[
+              SimpleBannerView(list: _convertBannerList(model.banner)),
+              Container(
+                child: Text(
+                  model.recommend.title,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                padding: EdgeInsets.all(10),
+              ),
+              Container(child: ProductCard(model.recommend.list), height: 230),
+              _createListView(model)
+            ],
+          )),
+          ShoppingCart(price: _price)
+        ],
+      ),
+      color: Colors.white,
+    );
+  }
+
+  List<String> _convertBannerList(List<StoreInfoBannerModel> banner) {
+    List<String> list = List();
+    banner.forEach((i) => list.add(i.url));
+    return list;
+  }
+
+  Widget _createListView(StoreInfoShoppingModel model) {
     return Row(
       children: <Widget>[
-        Container(
-          child: ProductSidebar(_storeInfoShoppingModel.sidebar),
-          width: 100,
-        ),
-        Expanded(
-          child: Container(
-            child: ProductListView(_storeInfoShoppingModel.list),
-          ),
-        )
+        Container(child: ProductSidebar(model.sidebar), width: 100),
+        Expanded(child: Container(child: ProductListView(model.list)))
       ],
       crossAxisAlignment: CrossAxisAlignment.start,
     );
@@ -54,7 +80,7 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
 
   @override
   void initState() {
-    _onRequest();
+    _futureBuilderFuture = _loadData();
     GlobalEvent.instance.eventBus.on<ProductPriceEvent>().listen((event) {
       setState(() {
         _price = double.tryParse((_price + event.price).toStringAsFixed(2));
@@ -71,39 +97,15 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
 
   @override
   Widget build(BuildContext context) {
-    /// 正在加载数据
-    if (_storeInfoShoppingModel == null) {
-      return Container();
-    }
-
-    /// 数据加载完毕
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Expanded(
-              child: ListView(
-            children: <Widget>[
-              _storeInfoShoppingModel.banner == null
-                  ? Container()
-                  : SimpleBannerView(),
-              Container(
-                child: Text(
-                  _storeInfoShoppingModel.recommend.title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                padding: EdgeInsets.all(10),
-              ),
-              Container(
-                child: ProductCard(_storeInfoShoppingModel.recommend.list),
-                height: 230,
-              ),
-              _createListView()
-            ],
-          )),
-          ShoppingCart(price: _price)
-        ],
-      ),
-      color: Colors.white,
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          StoreInfoShoppingModel model = snapshot.data;
+          return _createContentView(model);
+        }
+        return Container();
+      },
+      future: _futureBuilderFuture,
     );
   }
 

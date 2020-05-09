@@ -12,6 +12,7 @@ import 'package:food/ui/store_tab_bar.dart';
 import 'package:food/ui/store_tab_view_brand.dart';
 import 'package:food/ui/store_tab_view_evaluation.dart';
 import 'package:food/ui/store_tab_view_order.dart';
+import 'package:food/widget/network_error_view.dart';
 
 /// 商铺信息
 class StoreInfo extends StatefulWidget {
@@ -26,32 +27,31 @@ class StoreInfo extends StatefulWidget {
 }
 
 class StoreInfoState extends State<StoreInfo> {
-  StoreInfoModel _storeInfoModel;
+  var _futureBuilderFuture;
 
-  Future<Null> _onRequest() async {
+  Future<StoreInfoModel> _loadData() async {
     var url =
         '${NetworkConfig.HOST_URL}assets/store/details/1/store_details.json';
     Response response = await Dio().get(url);
     if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
       Map<String, dynamic> map = json.decode(response.data)['data'];
       var model = StoreInfoModel.fromJson(map);
-      setState(() => {_storeInfoModel = model});
+      return model;
     }
+    return null;
   }
 
-  Widget _createView() {
-    if (_storeInfoModel == null) {
-      return LoadView();
-    }
+  Widget _createView(StoreInfoModel model) {
     return NotificationListener(
       child: DefaultTabController(
-        length: _storeInfoModel.tab.length,
+        length: model.tab.length,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            StoreSearchSliver(imageUrl: _storeInfoModel.background),
+            StoreSearchSliver(imageUrl: model.background),
             SliverToBoxAdapter(
-                child: StoreInfoSummary(widget.model, _storeInfoModel)),
-            StoreTabBar(_storeInfoModel.tab)
+              child: StoreInfoSummary(widget.model, model),
+            ),
+            StoreTabBar(model.tab)
           ],
           body: TabBarView(
             children: [
@@ -67,12 +67,28 @@ class StoreInfoState extends State<StoreInfo> {
 
   @override
   void initState() {
-    _onRequest();
     super.initState();
+    _futureBuilderFuture = _loadData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white, body: _createView());
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: FutureBuilder(
+        builder: (context, snapshot) {
+          var state = snapshot.connectionState;
+          if (ConnectionState.waiting == state) {
+            return LoadView();
+          } else if (snapshot.hasData) {
+            StoreInfoModel model = snapshot.data;
+            return _createView(model);
+          } else {
+            return NetworkErrorView();
+          }
+        },
+        future: _futureBuilderFuture,
+      ),
+    );
   }
 }

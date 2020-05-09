@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food/ui/search_info.dart';
+import 'package:food/utils/route_utils.dart';
 import 'package:food/widget/wrap_cache_image.dart';
 
 class StoreSearchSliver extends StatelessWidget {
@@ -12,7 +14,9 @@ class StoreSearchSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
-        delegate: _StoreSearchDelegate(imageUrl), pinned: true);
+      delegate: _StoreSearchDelegate(imageUrl),
+      pinned: true,
+    );
   }
 }
 
@@ -64,7 +68,7 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
     return Color.fromARGB(alpha, 255, 255, 255);
   }
 
-  Widget _makeStickySearchWidget(double shrinkOffset) {
+  Widget _makeStickySearchWidget(BuildContext context, double shrinkOffset) {
     if (shrinkOffset <= minExtent) {
       return Expanded(
         child: Row(
@@ -86,7 +90,10 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
       child: Container(
         margin: EdgeInsets.only(left: 10, right: 10),
         child: FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            var url = 'sample://search_info';
+            RouteUtils.launch(context, SearchInfo(), url);
+          },
           color: Color(0xFFF0F0F0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -136,7 +143,7 @@ class _StoreSearchDelegate extends SliverPersistentHeaderDelegate {
                     ),
                     onPressed: () => {Navigator.pop(context)},
                   ),
-                  _makeStickySearchWidget(shrinkOffset),
+                  _makeStickySearchWidget(context, shrinkOffset),
                   IconButton(
                     icon: Image.asset(
                       'images/am5.png',

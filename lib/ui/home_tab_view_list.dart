@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/config/network_config.dart';
 import 'package:food/model/home_tab_model.dart';
 import 'package:food/model/home_tab_view_model.dart';
 import 'package:food/ui/store_info.dart';
 import 'package:food/utils/route_utils.dart';
+import 'package:food/widget/load_view.dart';
+import 'package:food/widget/network_error_view.dart';
 
 class HomeTabViewList extends StatefulWidget {
   final HomeTabModel model;
@@ -24,9 +24,9 @@ class HomeTabViewList extends StatefulWidget {
 
 class HomeTabViewListState extends State<HomeTabViewList>
     with AutomaticKeepAliveClientMixin {
-  List<HomeTabViewModel> _list = List();
+  var _futureBuilderFuture;
 
-  void _onRequest() async {
+  Future<List<HomeTabViewModel>> _loadData() async {
     var id = widget.model.id;
     var url = '${NetworkConfig.HOST_URL}assets/home/tab/$id/tab.json';
     Response response = await Dio().get(url);
@@ -35,8 +35,9 @@ class HomeTabViewListState extends State<HomeTabViewList>
       List<dynamic> data = map['data'];
       List<HomeTabViewModel> list =
           data.map((i) => HomeTabViewModel.fromJson(i)).toList();
-      setState(() => {_list.addAll(list)});
+      return list;
     }
+    return null;
   }
 
   Widget _createText(String text) {
@@ -160,21 +161,28 @@ class HomeTabViewListState extends State<HomeTabViewList>
 
   @override
   void initState() {
-    _onRequest();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _list.clear();
-    super.dispose();
+    _futureBuilderFuture = _loadData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) => _createItem(_list[index]),
-      itemCount: _list.length,
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        var state = snapshot.connectionState;
+        if (ConnectionState.waiting == state) {
+          return LoadView();
+        } else if (snapshot.hasData) {
+          List<HomeTabViewModel> list = snapshot.data;
+          return ListView.builder(
+            itemBuilder: (context, index) => _createItem(list[index]),
+            itemCount: list.length,
+          );
+        } else {
+          return NetworkErrorView();
+        }
+      },
+      future: _futureBuilderFuture,
     );
   }
 

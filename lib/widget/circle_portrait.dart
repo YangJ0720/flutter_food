@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+/// 我的 -> 圆角头像
 class CirclePortrait extends StatelessWidget {
   final String path;
   final double width;
@@ -12,8 +13,12 @@ class CirclePortrait extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var image =
-        path == null ? Image.asset('images/a4j.png') : Image.file(File(path));
+    Image image;
+    if (path == null) {
+      image = Image.asset('images/a4j.png');
+    } else {
+      image = Image.file(File(path));
+    }
     return Container(
       width: width,
       height: height,

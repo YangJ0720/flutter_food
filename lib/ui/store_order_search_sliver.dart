@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:food/config/network_config.dart';
 import 'package:food/model/store_info_shopping_model.dart';
 import 'package:food/widget/expand_number.dart';
+import 'package:food/widget/wrap_cache_image.dart';
 
 class StoreOrderSearchSliver extends StatelessWidget {
   @override
@@ -23,7 +25,10 @@ class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
     return Stack(
       children: <Widget>[
         Container(
-          child: Image.asset('images/aeg.jpg', fit: BoxFit.cover),
+          child: WrapCacheImage(
+            url: '${NetworkConfig.HOST_URL}images/a05.jpg',
+            fit: BoxFit.cover,
+          ),
           height: maxExtent,
         ),
         Positioned(

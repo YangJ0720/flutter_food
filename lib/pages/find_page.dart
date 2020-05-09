@@ -7,6 +7,7 @@ import 'package:food/model/find_model.dart';
 import 'package:food/ui/find_tab.dart';
 import 'package:food/ui/find_tab_view.dart';
 import 'package:food/widget/load_view.dart';
+import 'package:food/widget/network_error_view.dart';
 
 /// 发现
 class FindPage extends StatefulWidget {
@@ -18,42 +19,32 @@ class FindPage extends StatefulWidget {
 
 class FindState extends State
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
-  List<FindModel> _tabs;
   TabController _tabController;
 
-  _addListener() {
-    if (_tabController.animation.value == _tabController.index) {
-      print('index = ${_tabController.index}');
-    }
-  }
+  var _futureBuilderFuture;
 
-  void _onRequest() async {
+  Future<List<FindModel>> _loadData() async {
     var url = '${NetworkConfig.HOST_URL}assets/find.json';
     Response response = await Dio().get(url);
     if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
       List<dynamic> data = json.decode(response.data)['data'];
       List<FindModel> list = data.map((i) => FindModel.fromJson(i)).toList();
-      setState(() {
-        if (_tabs == null) {
-          _tabs = list;
-        } else {
-          _tabs.addAll(list);
-        }
-        _tabController = TabController(length: list.length, vsync: this);
-        _tabController.addListener(_addListener);
-      });
+
+      ///
+      _tabController = TabController(length: list.length, vsync: this);
+      return list;
     }
+    return null;
   }
 
   @override
   void initState() {
-    _onRequest();
     super.initState();
+    _futureBuilderFuture = _loadData();
   }
 
   @override
   void dispose() {
-    _tabController.removeListener(_addListener);
     _tabController.dispose();
     super.dispose();
   }
@@ -61,12 +52,22 @@ class FindState extends State
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (_tabs == null) {
-      return LoadView();
-    }
-    return Scaffold(
-      appBar: AppBar(title: FindTab(_tabs, _tabController)),
-      body: FindTabView(_tabs, _tabController),
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        var state = snapshot.connectionState;
+        if (ConnectionState.waiting == state) {
+          return LoadView();
+        } else if (snapshot.hasData) {
+          List<FindModel> list = snapshot.data;
+          return Scaffold(
+            appBar: AppBar(title: FindTab(list, _tabController)),
+            body: FindTabView(list, _tabController),
+          );
+        } else {
+          return NetworkErrorView();
+        }
+      },
+      future: _futureBuilderFuture,
     );
   }
 
