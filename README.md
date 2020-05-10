@@ -10,8 +10,10 @@ iOS Native工程暂不上传
 [Download](https://github.com/YangJ0720/FoodHybridAndroid/blob/master/app/release/app-release.apk)
 
 ## 效果图
-![image](https://gitee.com/YangJ0720/flutter_food/raw/master/doc/10.gif)
-![image](https://gitee.com/YangJ0720/flutter_food/raw/master/doc/11.gif)
+![image](https://github.com/YangJ0720/flutter_food/raw/master/doc/4.gif)
+![image](https://github.com/YangJ0720/flutter_food/raw/master/doc/8.gif)
+![image](https://github.com/YangJ0720/flutter_food/raw/master/doc/11.gif)
+![image](https://github.com/YangJ0720/flutter_food/raw/master/doc/12.gif)
 
 ## 实现功能
 * 完成APP各项基本功能开发（网络请求、数据解析、组件通信、channel通信等）
@@ -57,14 +59,52 @@ implementation project(':flutter_boost')
 ## 编译配置
 
 1.分别创建Android Native工程、iOS Native工程和flutter model工程
-#### 工程目录，如下图
-![image](https://gitee.com/YangJ0720/flutter_food/raw/master/doc/10.gif)
 
 #### 需要注意flutter工程选择的是model，如下图：
-![image](https://gitee.com/YangJ0720/flutter_food/raw/master/doc/10.gif)
+![image](https://github.com/YangJ0720/flutter_food/raw/master/doc/WX20200510-132511@2x.png)
+
+#### 创建好工程后结构目录，如下图
+![image](https://github.com/YangJ0720/flutter_food/raw/master/doc/credentials.png)
+
+
+2.Android Native依赖flutter model模块
+
+#### 打开Android工程找到settings.gradle文件，增加以下配置：
+```
+// Android Flutter 混编步骤一
+setBinding(new Binding([gradle: this]))
+evaluate(new File(settingsDir.parentFile, 'flutter_food/.android/include_flutter.groovy'))
+// 如果希望在Android Studio中既可以编译Android工程又可以编译Flutter工程，需要在这里导入Flutter模块（将flutter_food更改为自己的名称）
+include ':flutter_food'
+project(':flutter_food').projectDir = new File('../flutter_food')
+```
+
+#### 在app目录下找到build.gradle文件，增加以下配置：
+```
+android {
+    // Android Flutter 混编步骤二
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // Android Flutter 混编步骤三
+    implementation project(':flutter')
+}
+```
+
+#### 配置flutter run
+* 在Android Studio中找到Edit Configurations
+* 点击左上角 + 号
+* 选择Flutter
+* 在Dart entrypoint路径中配置flutter model的入口文件（我这里是main.dart）
+* 完成
+
 
 ## 遗留问题
-1.目前使用的百度地图SDK在flutter_boost中加载显示正常，但是当Activity销毁时并未移除(Flutter标准API实现没有出现该问题)
+1.目前使用的百度地图SDK在flutter_boost中加载显示正常，但是当Activity销毁时并未移除，后续优化该问题(Flutter标准API实现没有出现该问题)  
 2.生产环境中需要使用地图功能，可以使用百度地图flutter插件，本工程旨在学习flutter各种功能特性
 
 
