@@ -7,8 +7,9 @@ import 'package:food/widget/wrap_cache_image.dart';
 
 class ProductCard extends StatefulWidget {
   final List<StoreInfoRecommendSubModel> list;
+  final ValueChanged<double> valueChanged;
 
-  ProductCard(this.list);
+  ProductCard(this.list, this.valueChanged);
 
   @override
   State<StatefulWidget> createState() {
@@ -54,7 +55,10 @@ class ProductCardState extends State<ProductCard> {
                           '¥${model.price}',
                           style: TextStyle(color: Colors.red),
                         ),
-                        ExpandNumber(model: model)
+                        ExpandNumber(
+                          model: model,
+                          valueChanged: widget.valueChanged,
+                        )
                       ],
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     ),

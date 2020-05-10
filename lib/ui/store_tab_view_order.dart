@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:food/config/network_config.dart';
-import 'package:food/event/global_event.dart';
 import 'package:food/model/store_info_shopping_model.dart';
 import 'package:food/ui/product_card.dart';
 import 'package:food/ui/product_list_view.dart';
@@ -27,13 +26,23 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
   /// 请求点餐列表数据
   Future<StoreInfoShoppingModel> _loadData() async {
     var url = '${NetworkConfig.HOST_URL}assets/store/tab/tab_shopping.json';
-    Response response = await Dio().get(url);
-    if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
-      Map<String, dynamic> map = json.decode(response.data)['data'];
-      var model = StoreInfoShoppingModel.fromJson(map);
-      return model;
+    try {
+      Response response = await Dio().get(url);
+      if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
+        Map<String, dynamic> map = json.decode(response.data)['data'];
+        var model = StoreInfoShoppingModel.fromJson(map);
+        return model;
+      }
+    } catch (e) {
+      print('e = $e');
     }
     return null;
+  }
+
+  void _changedPrice(double price) {
+    setState(() {
+      _price = double.tryParse((_price + price).toStringAsFixed(2));
+    });
   }
 
   Widget _createContentView(StoreInfoShoppingModel model) {
@@ -51,7 +60,12 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
                 ),
                 padding: EdgeInsets.all(10),
               ),
-              Container(child: ProductCard(model.recommend.list), height: 230),
+              Container(
+                child: ProductCard(model.recommend.list, (price) {
+                  _changedPrice(price);
+                }),
+                height: 230,
+              ),
               _createListView(model)
             ],
           )),
@@ -72,7 +86,13 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
     return Row(
       children: <Widget>[
         Container(child: ProductSidebar(model.sidebar), width: 100),
-        Expanded(child: Container(child: ProductListView(model.list)))
+        Expanded(
+          child: Container(
+            child: ProductListView(model.list, (price) {
+              _changedPrice(price);
+            }),
+          ),
+        )
       ],
       crossAxisAlignment: CrossAxisAlignment.start,
     );
@@ -80,19 +100,14 @@ class StoreTabViewOrderState extends State<StoreTabViewOrder>
 
   @override
   void initState() {
-    _futureBuilderFuture = _loadData();
-    GlobalEvent.instance.eventBus.on<ProductPriceEvent>().listen((event) {
-      setState(() {
-        _price = double.tryParse((_price + event.price).toStringAsFixed(2));
-      });
-    });
     super.initState();
+    _futureBuilderFuture = _loadData();
   }
 
   @override
   void dispose() {
     super.dispose();
-    GlobalEvent.instance.eventBus.destroy();
+    _price = 0;
   }
 
   @override

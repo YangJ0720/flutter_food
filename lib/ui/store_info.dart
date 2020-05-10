@@ -32,11 +32,15 @@ class StoreInfoState extends State<StoreInfo> {
   Future<StoreInfoModel> _loadData() async {
     var url =
         '${NetworkConfig.HOST_URL}assets/store/details/1/store_details.json';
-    Response response = await Dio().get(url);
-    if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
-      Map<String, dynamic> map = json.decode(response.data)['data'];
-      var model = StoreInfoModel.fromJson(map);
-      return model;
+    try {
+      Response response = await Dio().get(url);
+      if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
+        Map<String, dynamic> map = json.decode(response.data)['data'];
+        var model = StoreInfoModel.fromJson(map);
+        return model;
+      }
+    } catch (e) {
+      print('e = $e');
     }
     return null;
   }
@@ -65,10 +69,14 @@ class StoreInfoState extends State<StoreInfo> {
     );
   }
 
+  void _retry() {
+    _futureBuilderFuture = _loadData();
+  }
+
   @override
   void initState() {
     super.initState();
-    _futureBuilderFuture = _loadData();
+    _retry();
   }
 
   @override
@@ -83,9 +91,10 @@ class StoreInfoState extends State<StoreInfo> {
           } else if (snapshot.hasData) {
             StoreInfoModel model = snapshot.data;
             return _createView(model);
-          } else {
-            return NetworkErrorView();
           }
+          return NetworkErrorView(valueChanged: (int value) {
+            setState(() => _retry());
+          });
         },
         future: _futureBuilderFuture,
       ),

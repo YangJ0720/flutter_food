@@ -169,18 +169,14 @@ class HomeTabViewListState extends State<HomeTabViewList>
   Widget build(BuildContext context) {
     return FutureBuilder(
       builder: (context, snapshot) {
-        var state = snapshot.connectionState;
-        if (ConnectionState.waiting == state) {
-          return LoadView();
-        } else if (snapshot.hasData) {
+        if (snapshot.hasData) {
           List<HomeTabViewModel> list = snapshot.data;
           return ListView.builder(
             itemBuilder: (context, index) => _createItem(list[index]),
             itemCount: list.length,
           );
-        } else {
-          return NetworkErrorView();
         }
+        return Container();
       },
       future: _futureBuilderFuture,
     );

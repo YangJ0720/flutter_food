@@ -15,6 +15,7 @@ class ShoppingCart extends StatefulWidget {
 }
 
 class ShoppingCartState extends State<ShoppingCart> {
+
   Widget _convertTextByPrice() {
     if (widget.price == null || widget.price == 0) {
       return Text(

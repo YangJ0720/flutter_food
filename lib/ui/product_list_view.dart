@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/model/store_info_shopping_model.dart';
+import 'package:food/ui/store_tab_view_order.dart';
 import 'package:food/ui/store_tab_view_order_details.dart';
 import 'package:food/utils/route_utils.dart';
 import 'package:food/widget/expand_number.dart';
@@ -7,8 +8,9 @@ import 'package:food/widget/wrap_cache_image.dart';
 
 class ProductListView extends StatefulWidget {
   final List<StoreInfoListModel> list;
+  final ValueChanged<double> valueChanged;
 
-  ProductListView(this.list);
+  ProductListView(this.list, this.valueChanged);
 
   @override
   State<StatefulWidget> createState() {
@@ -50,7 +52,10 @@ class ProductListViewState extends State<ProductListView> {
                     children: <Widget>[
                       Text('¥${model.price}',
                           style: TextStyle(color: Colors.red)),
-                      ExpandNumber(model: model)
+                      ExpandNumber(
+                        model: model,
+                        valueChanged: widget.valueChanged,
+                      )
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   )

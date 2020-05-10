@@ -2,14 +2,14 @@ import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food/event/global_event.dart';
 import 'package:food/model/store_info_shopping_model.dart';
 
 /// 商铺信息 -> 点餐份量自定义控件
 class ExpandNumber<T extends StoreInfoGeneric> extends StatefulWidget {
   final T model;
+  final ValueChanged<double> valueChanged;
 
-  ExpandNumber({Key key, this.model}) : super(key: key);
+  ExpandNumber({Key key, this.model, this.valueChanged}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ExpandNumberState();
@@ -21,10 +21,6 @@ class ExpandNumberState extends State<ExpandNumber>
   double _opacity = 0;
   double _distance = 0;
   AnimationController _controller;
-
-  void _sendEvent(double price) {
-    GlobalEvent.instance.eventBus.fire(ProductPriceEvent(price));
-  }
 
   @override
   void initState() {
@@ -73,10 +69,11 @@ class ExpandNumberState extends State<ExpandNumber>
                     widget.model.number <= 1) {
                   _controller.reverse();
                 }
+                /// 数量减一
+                widget.valueChanged(-widget.model.price);
                 setState(() {
                   widget.model.number -= 1;
                 });
-                _sendEvent(-widget.model.price);
               },
             ),
             width: 20,
@@ -103,10 +100,11 @@ class ExpandNumberState extends State<ExpandNumber>
             if (!_controller.isAnimating && _distance == 0) {
               _controller.forward();
             }
+            /// 数量加一
+            widget.valueChanged(widget.model.price);
             setState(() {
               widget.model.number += 1;
             });
-            _sendEvent(widget.model.price);
           },
         ),
       ],

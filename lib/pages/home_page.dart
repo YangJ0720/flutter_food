@@ -41,14 +41,18 @@ class HomeState extends State
 
   Future<HomeModel> _loadData() async {
     var url = '${NetworkConfig.HOST_URL}assets/home/home.json';
-    Response response = await Dio().get(url);
-    if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
-      Map<String, dynamic> data = json.decode(response.data)['data'];
-      HomeModel model = HomeModel.fromJson(data);
+    try {
+      Response response = await Dio().get(url);
+      if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
+        Map<String, dynamic> data = json.decode(response.data)['data'];
+        HomeModel model = HomeModel.fromJson(data);
 
-      ///
-      _tabController = TabController(length: model.tab.length, vsync: this);
-      return model;
+        ///
+        _tabController = TabController(length: model.tab.length, vsync: this);
+        return model;
+      }
+    } catch (e) {
+      print('e = $e');
     }
     return null;
   }
@@ -95,9 +99,13 @@ class HomeState extends State
     );
   }
 
+  void _retry() {
+    _futureBuilderFuture = _loadData();
+  }
+
   @override
   void initState() {
-    _futureBuilderFuture = _loadData();
+    _retry();
 
     /// 调用Native获取位置信息
     _methodChannel = MethodChannel('method_channel');
@@ -135,9 +143,10 @@ class HomeState extends State
           } else if (snapshot.hasData) {
             HomeModel model = snapshot.data;
             return _createBody(model);
-          } else {
-            return NetworkErrorView();
           }
+          return NetworkErrorView(valueChanged: (int value) {
+            setState(() => _retry());
+          });
         },
         future: _futureBuilderFuture,
       ),

@@ -25,22 +25,30 @@ class FindState extends State
 
   Future<List<FindModel>> _loadData() async {
     var url = '${NetworkConfig.HOST_URL}assets/find.json';
-    Response response = await Dio().get(url);
-    if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
-      List<dynamic> data = json.decode(response.data)['data'];
-      List<FindModel> list = data.map((i) => FindModel.fromJson(i)).toList();
+    try {
+      Response response = await Dio().get(url);
+      if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
+        List<dynamic> data = json.decode(response.data)['data'];
+        List<FindModel> list = data.map((i) => FindModel.fromJson(i)).toList();
 
-      ///
-      _tabController = TabController(length: list.length, vsync: this);
-      return list;
+        ///
+        _tabController = TabController(length: list.length, vsync: this);
+        return list;
+      }
+    } catch (e) {
+      print('e = $e');
     }
     return null;
+  }
+
+  void _retry() {
+    _futureBuilderFuture = _loadData();
   }
 
   @override
   void initState() {
     super.initState();
-    _futureBuilderFuture = _loadData();
+    _retry();
   }
 
   @override
@@ -63,9 +71,10 @@ class FindState extends State
             appBar: AppBar(title: FindTab(list, _tabController)),
             body: FindTabView(list, _tabController),
           );
-        } else {
-          return NetworkErrorView();
         }
+        return NetworkErrorView(valueChanged: (int value) {
+          setState(() => _retry());
+        });
       },
       future: _futureBuilderFuture,
     );

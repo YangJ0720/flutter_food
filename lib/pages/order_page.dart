@@ -50,23 +50,28 @@ class OrderState extends State with AutomaticKeepAliveClientMixin {
 
   Future<List<OrderModel>> _loadData() async {
     var url = '${NetworkConfig.HOST_URL}assets/order/order.json';
-    Response response = await Dio().get(url);
-    if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
-      List<dynamic> data = json.decode(response.data)['data'];
-      List<OrderModel> list = data.map((i) => OrderModel.fromJson(i)).toList();
-      return list;
+    try {
+      Response response = await Dio().get(url);
+      if (NetworkConfig.RESPONSE_SUCCESS == response.statusCode) {
+        List<dynamic> data = json.decode(response.data)['data'];
+        List<OrderModel> list =
+            data.map((i) => OrderModel.fromJson(i)).toList();
+        return list;
+      }
+    } catch (e) {
+      print('e = $e');
     }
     return null;
   }
 
-  void retry(int value) {
-    _loadData();
+  void _retry() {
+    _futureBuilderFuture = _loadData();
   }
 
   @override
   void initState() {
     super.initState();
-    _futureBuilderFuture = _loadData();
+    _retry();
   }
 
   @override
@@ -84,7 +89,9 @@ class OrderState extends State with AutomaticKeepAliveClientMixin {
             body: OrderList(list, _changedOpacity),
           );
         } else {
-          return NetworkErrorView(valueChanged: retry);
+          return NetworkErrorView(valueChanged: (int value) {
+            setState(() => _retry());
+          });
         }
       },
       future: _futureBuilderFuture,
