@@ -7,9 +7,8 @@ import 'package:food/widget/circle_portrait.dart';
 
 /// 我的 -> 用户信息
 class MineUserInfo extends StatefulWidget {
-  final String path;
 
-  const MineUserInfo({Key key, this.path}) : super(key: key);
+  const MineUserInfo({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -22,12 +21,6 @@ class MineUserInfoState extends State<MineUserInfo> {
 
   void changedPath(String path) {
     _path = path;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _path = widget.path;
   }
 
   @override

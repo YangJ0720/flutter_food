@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 import 'package:food/config/network_config.dart';
 import 'package:food/model/home_tab_model.dart';
 import 'package:food/model/home_tab_view_model.dart';

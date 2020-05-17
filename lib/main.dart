@@ -31,25 +31,26 @@ class AppState extends State {
     super.initState();
     FlutterBoost.singleton.registerPageBuilders(
       {
-        'home': (pageName, param, _) => Home(),
-        'system_settings': (pageName, param, _) {
+        'sample://home': (pageName, param, _) => Home(),
+        'sample://system_settings': (pageName, param, _) {
           var value = param['key'];
           print('pageName = $pageName, value = $value');
           return SystemSettings();
         },
-        'user_info': (pageName, param, _) {
+        'sample://user_info': (pageName, param, _) {
           var path = param['path'];
           return UserInfo(path: path);
         },
-        'store_info': (pageName, param, _) {
+        'sample://store_info': (pageName, param, _) {
           var mapModel = jsonDecode(param['HomeTabViewModel']);
           var model = HomeTabViewModel.fromJson(mapModel);
           return StoreInfo(model);
         },
-        'product_info': (pageName, param, _) => StoreTabViewOrderDetails(),
-        'transport_map': (pageName, param, _) => TransportMap(),
-        'search_info': (pageName, param, _) => SearchInfo(),
-        'location_info': (pageName, param, _) {
+        'sample://product_info': (pageName, param, _) =>
+            StoreTabViewOrderDetails(),
+        'sample://transport_map': (pageName, param, _) => TransportMap(),
+        'sample://search_info': (pageName, param, _) => SearchInfo(),
+        'sample://location_info': (pageName, param, _) {
           var address = param['address'];
           return LocationInfo(address: address);
         },

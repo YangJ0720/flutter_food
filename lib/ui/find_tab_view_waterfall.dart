@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food/model/find_model.dart';
 import 'package:food/model/find_waterfall_model.dart';
-import 'package:food/ui/undone_show.dart';
 import 'package:food/utils/route_utils.dart';
 
 /// 发现 -> 瀑布流布局
@@ -104,13 +103,15 @@ class FindTabViewWaterfallState extends State<FindTabViewWaterfall> {
     return RefreshIndicator(
       onRefresh: _onRefresh,
       child: StaggeredGridView.countBuilder(
-          itemCount: _list.length,
-          crossAxisCount: 4,
-          mainAxisSpacing: 5,
-          crossAxisSpacing: 5,
-          itemBuilder: (context, index) => _createItem(index),
-          staggeredTileBuilder: (index) =>
-              StaggeredTile.count(2, index % 2 == 0 ? 2 : 1)),
+        itemCount: _list.length,
+        crossAxisCount: 4,
+        mainAxisSpacing: 5,
+        crossAxisSpacing: 5,
+        itemBuilder: (context, index) => _createItem(index),
+        staggeredTileBuilder: (index) {
+          return StaggeredTile.count(2, index % 2 == 0 ? 2 : 1);
+        },
+      ),
     );
   }
 }

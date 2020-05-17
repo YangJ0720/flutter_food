@@ -6,6 +6,7 @@ import 'package:food/ui/mine_member_card.dart';
 import 'package:food/ui/mine_user_info.dart';
 import 'package:food/ui/system_settings.dart';
 import 'package:food/utils/route_utils.dart';
+import 'package:food/widget/opacity_title.dart';
 
 /// 我的
 class MinePage extends StatefulWidget {
@@ -16,26 +17,21 @@ class MinePage extends StatefulWidget {
 }
 
 class MineState extends State with AutomaticKeepAliveClientMixin {
-  /// 标题字体透明度
-  double _alpha = 0;
+  final GlobalKey<OpacityTitleState> _keyOpacityTitle = GlobalKey();
+  final GlobalKey<MineUserInfoState> _globalKey = GlobalKey();
 
   /// 标题栏高度
   double _appBarHeight = 0;
 
-  /// 用户头像文件缓存路径
-  String _path;
-
   /// EventChannel
   EventChannel _eventChannel;
-
-  final GlobalKey<MineUserInfoState> globalKey = GlobalKey();
 
   /// 创建AppBar
   AppBar _createAppBar() {
     AppBar appBar = AppBar(
       backgroundColor: Colors.white,
       centerTitle: true,
-      title: Opacity(opacity: _alpha, child: Text('我的')),
+      title: OpacityTitle(_keyOpacityTitle, title: '我的'),
       textTheme: TextTheme(title: TextStyle(color: Colors.black, fontSize: 16)),
       actions: <Widget>[
         IconButton(
@@ -47,7 +43,7 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
         ),
         IconButton(
           icon: Icon(Icons.sms, color: Colors.grey),
-          onPressed: () {},
+          onPressed: () => RouteUtils.launchUndone(context, '消息'),
         ),
       ],
     );
@@ -85,19 +81,15 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
     double value = pixels / _appBarHeight;
     if (value >= 1) {
       value = 1;
-    } else if (_alpha != 0) {
-      value = 0;
     } else {
-      return;
+      value = 0;
     }
-    setState(() => _alpha = value);
+    _keyOpacityTitle.currentState.changedOpacity(value);
   }
 
   void _onData(Object data) {
-    setState(() {
-      _path = data.toString();
-      globalKey.currentState.changedPath(_path);
-    });
+    var path = data.toString();
+    _globalKey.currentState.changedPath(path);
   }
 
   void _onError(Object error) {}
@@ -109,6 +101,13 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
     _eventChannel
         .receiveBroadcastStream('flutter event channel')
         .listen(_onData, onError: _onError, cancelOnError: true);
+  }
+
+  @override
+  void dispose() {
+    _eventChannel.receiveBroadcastStream(null);
+    _eventChannel = null;
+    super.dispose();
   }
 
   @override
@@ -127,7 +126,7 @@ class MineState extends State with AutomaticKeepAliveClientMixin {
         },
         child: ListView(
           children: <Widget>[
-            MineUserInfo(key: globalKey, path: _path),
+            MineUserInfo(key: _globalKey),
             MineMemberCard(),
             Row(
               children: <Widget>[

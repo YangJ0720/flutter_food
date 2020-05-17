@@ -6,14 +6,17 @@ import 'package:food/ui/transport_map_more_sliver.dart';
 import 'package:food/utils/route_utils.dart';
 import 'package:food/widget/transport_map_knight_info.dart';
 
+/// 骑手送餐地图界面
 class TransportMap extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return TransportMapState();
   }
+
 }
 
 class TransportMapState extends State<TransportMap> {
+
   Widget _getPlatformMapView() {
     if (Platform.isAndroid) {
       return AndroidView(

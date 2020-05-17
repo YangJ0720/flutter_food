@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:food/config/network_config.dart';
 import 'package:food/model/home_tab_view_model.dart';
 import 'package:food/model/store_info_model.dart';
-import 'package:food/widget/load_view.dart';
 import 'package:food/ui/store_info_summary.dart';
 import 'package:food/ui/store_search_sliver.dart';
 import 'package:food/ui/store_tab_bar.dart';
 import 'package:food/ui/store_tab_view_brand.dart';
 import 'package:food/ui/store_tab_view_evaluation.dart';
 import 'package:food/ui/store_tab_view_order.dart';
+import 'package:food/widget/load_view.dart';
 import 'package:food/widget/network_error_view.dart';
 
 /// 商铺信息

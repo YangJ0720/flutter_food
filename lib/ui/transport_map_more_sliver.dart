@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 
 class TransportMapMoreSliver extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
                         padding: EdgeInsets.all(5),
                       ),
                     ),
-                    onTap: () => Navigator.pop(context),
+                    onTap: () => FlutterBoost.singleton.closeByContext(context),
                   ),
                   ClipOval(
                     child: Container(

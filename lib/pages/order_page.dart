@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:food/ui/order_list.dart';
 import 'package:food/utils/route_utils.dart';
 import 'package:food/widget/load_view.dart';
 import 'package:food/widget/network_error_view.dart';
+import 'package:food/widget/opacity_title.dart';
 
 /// 订单
 class OrderPage extends StatefulWidget {
@@ -21,31 +21,11 @@ class OrderPage extends StatefulWidget {
 }
 
 class OrderState extends State with AutomaticKeepAliveClientMixin {
-  double _opacity = 0;
+  final GlobalKey<OpacityTitleState> _globalKey = GlobalKey();
   var _futureBuilderFuture;
 
   void _changedOpacity(double opacity) {
-    setState(() => _opacity = opacity);
-  }
-
-  Widget _createAppBar() {
-    return AppBar(
-      actions: <Widget>[
-        MaterialButton(
-          onPressed: () => RouteUtils.launchUndone(context, '其他订单'),
-          child: Text('其他订单'),
-        )
-      ],
-      backgroundColor: Colors.white,
-      centerTitle: true,
-      title: Opacity(
-        opacity: _opacity,
-        child: Text(
-          '我的订单',
-          style: TextStyle(fontSize: 18, color: Colors.black),
-        ),
-      ),
-    );
+    this._globalKey.currentState.changedOpacity(opacity);
   }
 
   Future<List<OrderModel>> _loadData() async {
@@ -85,14 +65,23 @@ class OrderState extends State with AutomaticKeepAliveClientMixin {
         } else if (snapshot.hasData) {
           List<OrderModel> list = snapshot.data;
           return Scaffold(
-            appBar: _createAppBar(),
+            appBar: AppBar(
+              actions: <Widget>[
+                MaterialButton(
+                  onPressed: () => RouteUtils.launchUndone(context, '其他订单'),
+                  child: Text('其他订单'),
+                )
+              ],
+              backgroundColor: Colors.white,
+              centerTitle: true,
+              title: OpacityTitle(_globalKey, title: '我的订单'),
+            ),
             body: OrderList(list, _changedOpacity),
           );
-        } else {
-          return NetworkErrorView(valueChanged: (int value) {
-            setState(() => _retry());
-          });
         }
+        return NetworkErrorView(valueChanged: (int value) {
+          setState(() => _retry());
+        });
       },
       future: _futureBuilderFuture,
     );
